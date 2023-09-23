@@ -17,7 +17,7 @@
       </div>
     </li>
 
-    @can('admin')
+    {{-- @can('admin')
     <li class="nav-item dropdown">
       <button class="btn btn-info btn-sm dropdown-toggle ml-1" type="button" id="dropdownMenuButton"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,7 +36,7 @@
         @endif
       </div>
     </li>
-    @endcan
+    @endcan --}}
 
   </ul>
   <!-- \Left navbar links -->

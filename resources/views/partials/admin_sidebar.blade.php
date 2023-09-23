@@ -27,6 +27,28 @@
         </a>
       </li>
 
+       @can('view_group')
+      <li class="nav-item">
+        <a href="{{route('admin.groups.index')}}" class="nav-link" id="groups">
+          <i class="nav-icon fas fa-bars"></i>
+          <p>
+            {{__('List Data')}}
+          </p>
+        </a>
+      </li>
+      @endcan
+
+       @can('view_group')
+      <li class="nav-item">
+        <a href="{{route('admin.groups.index')}}" class="nav-link" id="groups">
+          <i class="nav-icon fas fa-braille"></i>
+          <p>
+            {{__('Order Data')}}
+          </p>
+        </a>
+      </li>
+      @endcan
+
       @can('view_group')
       <li class="nav-item">
         <a href="{{route('admin.groups.index')}}" class="nav-link" id="groups">
