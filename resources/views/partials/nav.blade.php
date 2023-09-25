@@ -4,7 +4,7 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
-    <li class="nav-item dropdown text-uppercase">
+    {{-- <li class="nav-item dropdown text-uppercase">
       <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button" id="dropdownMenuButton"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-globe"></i> {{app()->getLocale()}}
@@ -15,7 +15,7 @@
           href="{{route('change_locale',$lang['iso'])}}">{{$lang['iso']}}</a> @endif
         @endforeach
       </div>
-    </li>
+    </li> --}}
 
     {{-- @can('admin')
     <li class="nav-item dropdown">

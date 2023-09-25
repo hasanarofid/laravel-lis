@@ -4,12 +4,12 @@
   @include('partials.head')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed text-sm sidebar-collapse">
-  <div class="preloader">
-  </div>
+  {{-- <div class="preloader">
+  </div> --}}
   {{-- <div class="loader">
     
   </div> --}}
-  <img src="{{url('img/'.$info['preloader'])}}" class="loader" alt="">
+
   <div class="wrapper">
 
     <!-- Navbar -->
