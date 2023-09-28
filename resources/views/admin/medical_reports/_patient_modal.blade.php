@@ -39,7 +39,7 @@
                             </li>
                             <li>
                                 <h5>
-                                    <b>{{__('Nationality')}} : </b> {{$group['patient']['country']['nationality']}}
+                                    <b>{{__('Nationality')}} : </b> {{!empty($group['patient']['country']['nationality']) ? $group['patient']['country']['nationality'] : '-'}}
                                 </h5>
                             </li>
                             <li>
