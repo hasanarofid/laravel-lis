@@ -242,44 +242,8 @@ class GroupsController extends Controller
 
             //save receipt pdf
             $group = Group::find($group['id']);
-            $type = 1;
-            $reports_settings = setting("reports");
-            $info_settings = setting("info");
-            $barcode_settings = setting("barcode");
-            $pdf_name = "report_" . $group["id"] . ".pdf";
-            $pdf = PDF::loadView(
-                "pdf.receipt",
-                compact(
-                    "group",
-                    "reports_settings",
-                    "info_settings",
-                    "type",
-                    "barcode_settings"
-                )
-            );
 
-
-            // Save the PDF to a file
-            $pdf->save("uploads/pdf/" . $pdf_name);
-
-            // Optionally, you can return the PDF as a response
-            $pdf->stream();
-            // dd($pdf);
-            // $pdfContents = $pdf->output();
-            // $pdf = PDF::loadView(
-            //     "pdf.barcode",
-            //     compact("group", "number", "barcode_settings"),
-            //     [],
-            //     [
-            //         "format" => [$barcode_settings["width"], $barcode_settings["height"]]
-            //     ]
-            // );
-            // dd($pdfContents);
-
-            // $pdf->save("uploads/pdf/" . $pdf);
-
-            // dd($pdf_name);
-            // $pdf = generate_pdf2($group, 2);
+            $pdf = generate_pdf($group, 2);
             // // dd($pdf);
             if (isset($pdf)) {
                 $group->update(['receipt_pdf' => $pdf]);
