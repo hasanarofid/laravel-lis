@@ -278,6 +278,7 @@
     </div>
 
     <div class="card-footer">
+    {{-- {{ dd($group['receipt_pdf'])  }} --}}
         <!-- this row will not appear when printing -->
         <div class="row no-print">
             <div class="col-12">

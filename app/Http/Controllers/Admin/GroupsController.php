@@ -24,6 +24,8 @@ use App\Http\Requests\Admin\BulkActionRequest;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 use DataTables;
+use Exception;
+use PDF;
 
 class GroupsController extends Controller
 {
@@ -134,74 +136,35 @@ class GroupsController extends Controller
      */
     public function store(GroupRequest $request)
     {
-        // try {
-        $group = Group::create($request->except('_token', 'tests', 'cultures', 'packages', 'payments', 'DataTables_Table_0_length', 'DataTables_Table_1_length', 'DataTables_Table_2_length'));
+        try {
+            $group = Group::create($request->except('_token', 'tests', 'cultures', 'packages', 'payments', 'DataTables_Table_0_length', 'DataTables_Table_1_length', 'DataTables_Table_2_length'));
 
 
-        $group->update([
-            'branch_id' => session('branch_id'),
-            'created_by' => auth()->guard('admin')->user()->id
-        ]);
+            $group->update([
+                'branch_id' => session('branch_id'),
+                'created_by' => auth()->guard('admin')->user()->id
+            ]);
 
-        //store assigned tests
-        if ($request->has('tests')) {
-            foreach ($request['tests'] as $test) {
-                GroupTest::create([
-                    'group_id' => $group->id,
-                    'test_id' => $test['id'],
-                    'price' => $test['price']
-                ]);
-            }
-        }
-
-        //store assigned cultures
-        $culture_options = CultureOption::where('parent_id', 0)->get();
-
-        if ($request->has('cultures')) {
-            foreach ($request['cultures'] as $culture) {
-                $group_culture = GroupCulture::create([
-                    'group_id' => $group->id,
-                    'culture_id' => $culture['id'],
-                    'price' => $culture['price']
-                ]);
-
-                //assign default report
-                foreach ($culture_options as $culture_option) {
-                    GroupCultureOption::create([
-                        'group_culture_id' => $group_culture['id'],
-                        'culture_option_id' => $culture_option['id'],
-                    ]);
-                }
-            }
-        }
-
-        //store assigned packages
-        if ($request->has('packages')) {
-            foreach ($request['packages'] as $package) {
-                // packages tests and cultures
-                $original_package = Package::find($package['id']);
-
-                $group_package = GroupPackage::create([
-                    'group_id' => $group['id'],
-                    'package_id' => $package['id'],
-                    'price' => $package['price']
-                ]);
-
-                //tests
-                foreach ($original_package['tests'] as $test) {
+            // //store assigned tests
+            if ($request->has('tests')) {
+                foreach ($request['tests'] as $test) {
                     GroupTest::create([
-                        'group_id' => $group['id'],
-                        'test_id' => $test['test']['id'],
-                        'package_id' => $group_package['id']
+                        'group_id' => $group->id,
+                        'test_id' => $test['id'],
+                        'price' => $test['price']
                     ]);
                 }
+            }
 
-                //cultures
-                foreach ($original_package['cultures'] as $culture) {
+            // //store assigned cultures
+            $culture_options = CultureOption::where('parent_id', 0)->get();
+
+            if ($request->has('cultures')) {
+                foreach ($request['cultures'] as $culture) {
                     $group_culture = GroupCulture::create([
-                        'group_id' => $group['id'],
-                        'culture_id' => $culture['culture']['id'],
-                        'package_id' => $group_package['id']
+                        'group_id' => $group->id,
+                        'culture_id' => $culture['id'],
+                        'price' => $culture['price']
                     ]);
 
                     //assign default report
@@ -213,51 +176,128 @@ class GroupsController extends Controller
                     }
                 }
             }
-        }
 
-        //payments
-        if ($request->has('')) {
-            foreach ($request['payments'] as $payment) {
-                $group->payments()->create([
-                    'date' => $payment['date'],
-                    'payment_method_id' => $payment['payment_method_id'],
-                    'amount' => $payment['amount'],
-                ]);
+            // //store assigned packages
+            if ($request->has('packages')) {
+                foreach ($request['packages'] as $package) {
+                    // packages tests and cultures
+                    $original_package = Package::find($package['id']);
+
+                    $group_package = GroupPackage::create([
+                        'group_id' => $group['id'],
+                        'package_id' => $package['id'],
+                        'price' => $package['price']
+                    ]);
+
+                    //tests
+                    foreach ($original_package['tests'] as $test) {
+                        GroupTest::create([
+                            'group_id' => $group['id'],
+                            'test_id' => $test['test']['id'],
+                            'package_id' => $group_package['id']
+                        ]);
+                    }
+
+                    //cultures
+                    foreach ($original_package['cultures'] as $culture) {
+                        $group_culture = GroupCulture::create([
+                            'group_id' => $group['id'],
+                            'culture_id' => $culture['culture']['id'],
+                            'package_id' => $group_package['id']
+                        ]);
+
+                        //assign default report
+                        foreach ($culture_options as $culture_option) {
+                            GroupCultureOption::create([
+                                'group_culture_id' => $group_culture['id'],
+                                'culture_option_id' => $culture_option['id'],
+                            ]);
+                        }
+                    }
+                }
             }
+
+            // //payments
+            if ($request->has('')) {
+                foreach ($request['payments'] as $payment) {
+                    $group->payments()->create([
+                        'date' => $payment['date'],
+                        'payment_method_id' => $payment['payment_method_id'],
+                        'amount' => $payment['amount'],
+                    ]);
+                }
+            }
+            // // dd(group_test_calculations($group['id']));
+            // //barcode
+            generate_barcode($group['id']);
+
+            // //assign default report 
+            $this->assign_tests_report($group['id']);
+
+            // //assign consumption 
+            $this->assign_consumption($group['id']);
+
+            // //calculations
+            group_test_calculations($group['id']);
+
+            //save receipt pdf
+            $group = Group::find($group['id']);
+            $type = 1;
+            $reports_settings = setting("reports");
+            $info_settings = setting("info");
+            $barcode_settings = setting("barcode");
+            $pdf_name = "report_" . $group["id"] . ".pdf";
+            $pdf = PDF::loadView(
+                "pdf.receipt",
+                compact(
+                    "group",
+                    "reports_settings",
+                    "info_settings",
+                    "type",
+                    "barcode_settings"
+                )
+            );
+
+
+            // Save the PDF to a file
+            $pdf->save("uploads/pdf/" . $pdf_name);
+
+            // Optionally, you can return the PDF as a response
+            $pdf->stream();
+            // dd($pdf);
+            // $pdfContents = $pdf->output();
+            // $pdf = PDF::loadView(
+            //     "pdf.barcode",
+            //     compact("group", "number", "barcode_settings"),
+            //     [],
+            //     [
+            //         "format" => [$barcode_settings["width"], $barcode_settings["height"]]
+            //     ]
+            // );
+            // dd($pdfContents);
+
+            // $pdf->save("uploads/pdf/" . $pdf);
+
+            // dd($pdf_name);
+            // $pdf = generate_pdf2($group, 2);
+            // // dd($pdf);
+            if (isset($pdf)) {
+                $group->update(['receipt_pdf' => $pdf]);
+            }
+            // dd($group);
+            //send notification with the patient code
+            // $patient = Patient::find($group['doctor_id']);
+            // send_notification('patient_code', $patient);
+
+            session()->flash('success', __('Group saved successfully'));
+
+            return redirect()->route('admin.groups.show', $group['id']);
+        } catch (Barryvdh\DomPDF\Exception $e) {
+            // Log the exception for debugging
+            Log::error("PDF Generation Error: " . $e->getMessage());
+            session()->flash('failed', 'Error generating PDF');
+            return redirect()->back();
         }
-        // dd(group_test_calculations($group['id']));
-        //barcode
-        generate_barcode($group['id']);
-
-        //assign default report 
-        $this->assign_tests_report($group['id']);
-
-        //assign consumption 
-        $this->assign_consumption($group['id']);
-
-        //calculations
-        group_test_calculations($group['id']);
-
-        //save receipt pdf
-        // $group = Group::find($group['id']);
-
-        // $pdf = generate_pdf($group, 2);
-
-        // if (isset($pdf)) {
-        //     $group->update(['receipt_pdf' => $pdf]);
-        // }
-        // dd($group);
-        //send notification with the patient code
-        // $patient = Patient::find($group['patient_id']);
-        // send_notification('patient_code', $patient);
-
-        session()->flash('success', __('Group saved successfully'));
-
-        return redirect()->route('admin.groups.show', $group['id']);
-        // } catch (Exception $e) {
-        //     session()->flash('success', __('Something went wrong'));
-        //     return redirect()->back();
-        // }
     }
 
     /**
@@ -479,15 +519,15 @@ class GroupsController extends Controller
         //save receipt pdf
         $group = Group::with(['tests', 'cultures'])->where('id', $id)->first();
 
-        $pdf = generate_pdf($group, 2);
+        // $pdf = generate_pdf($group, 2);
 
-        if (isset($pdf)) {
-            $group->update(['receipt_pdf' => $pdf]);
-        }
+        // if (isset($pdf)) {
+        //     $group->update(['receipt_pdf' => $pdf]);
+        // }
 
         //send notification with the patient code
-        $patient = Patient::find($group['patient_id']);
-        send_notification('patient_code', $patient);
+        // $patient = Patient::find($group['patient_id']);
+        // send_notification('patient_code', $patient);
 
         session()->flash('success', __('Group updated successfully'));
 
