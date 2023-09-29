@@ -483,11 +483,11 @@ class GroupsController extends Controller
         //save receipt pdf
         $group = Group::with(['tests', 'cultures'])->where('id', $id)->first();
 
-        // $pdf = generate_pdf($group, 2);
+        $pdf = generate_pdf($group, 2);
 
-        // if (isset($pdf)) {
-        //     $group->update(['receipt_pdf' => $pdf]);
-        // }
+        if (isset($pdf)) {
+            $group->update(['receipt_pdf' => $pdf]);
+        }
 
         //send notification with the patient code
         // $patient = Patient::find($group['patient_id']);

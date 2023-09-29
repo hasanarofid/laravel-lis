@@ -65,7 +65,6 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>{{__('Nationality')}}</label>
-                            <input class="form-control" id="nationality" @if(isset($group)&&isset($group['patient'])) value="{{$group['patient']['country']['nationality']}}" @endif readonly>
                         </div> 
                     </div>
                     <div class="col-lg-3">
