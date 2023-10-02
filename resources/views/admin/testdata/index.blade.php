@@ -92,26 +92,17 @@
         <!-- \filter -->
         <div class="row">
             <div class="col-lg-12 table-responsive">
-                <table id="medical_reports_table" class="table table-striped table-bordered"  width="100%">
+                <table id="test_data_table" class="table table-striped table-bordered"  width="100%">
                     <thead>
                         <tr>
-                            <th width="10px">
+                            {{-- <th width="10px">
                                 <input type="checkbox" class="check_all" name="" id="">
-                            </th>
-                            <th width="10px">#</th>
-                            <th width="10px">{{__('Created By')}}</th>
-                            <th width="10px">{{__('Contract')}}</th>
-                            <th width="10px">{{__('Barcode')}}</th>
-                            <th width="100px">{{ __('Patient Code') }}</th>
-                            <th>{{ __('Patient Name') }}</th>
-                            <th width="50px">{{ __('Gender') }}</th>
-                            <th width="50px">{{ __('Age') }}</th>
-                            <th width="50px">{{ __('Phone') }}</th>
-                            <th width="200px">{{ __('Tests') }}</th>
-                            <th width="100px">{{ __('Date') }}</th>
-                            <th class="text-center" width="10px">{{__('Done')}}</th>
-                            <th class="text-center" width="10px">{{__('Signed')}}</th>
-                            <th class="text-center" width="10px">{{__('Signed By')}}</th>
+                            </th> --}}
+                            {{-- <th width="10px">#</th> --}}
+                            <th width="10px">DEVICE ID</th>
+                            <th width="10px">PATIENT ID</th>
+                            <th width="10px">PATIENT NAME</th>
+                            <th width="100px">JUMLAH RESULT TEST ID</th>
                             <th width="50px">{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -124,9 +115,12 @@
     </div>
     <!-- /.card-body -->
 </div>
+
 @include('admin.groups.modals.print_barcode')
 
 @endsection
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @section('scripts')
     <script>
         var can_delete=@can('delete_medical_report')true @else false @endcan ;

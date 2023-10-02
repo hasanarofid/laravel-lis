@@ -29,7 +29,7 @@
 
        @can('view_group')
       <li class="nav-item">
-        <a href="{{route('admin.groups.index')}}" class="nav-link" id="groups">
+        <a href="{{route('admin.testdata.index')}}" class="nav-link" id="groups">
           <i class="nav-icon fas fa-bars"></i>
           <p>
             {{__('List Data')}}
@@ -38,7 +38,7 @@
       </li>
       @endcan
 
-       @can('view_group')
+       {{-- @can('view_group')
       <li class="nav-item">
         <a href="{{route('admin.groups.index')}}" class="nav-link" id="groups">
           <i class="nav-icon fas fa-braille"></i>
@@ -47,7 +47,7 @@
           </p>
         </a>
       </li>
-      @endcan
+      @endcan --}}
 
       @can('view_group')
       <li class="nav-item">

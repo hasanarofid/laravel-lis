@@ -351,7 +351,7 @@ class MedicalReportsController extends Controller
                     //update result
                     $group_test_result->update([
                         'result' => $result['result'],
-                        'status' => $result['status']
+                        'status' => 'Pending'
                     ]);
                 }
             }

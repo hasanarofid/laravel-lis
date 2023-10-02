@@ -1,3 +1,4 @@
+
 var count = 0;
 var antibiotic_count = $('#antibiotic_count').val();
 
@@ -9,7 +10,7 @@ var antibiotic_count = $('#antibiotic_count').val();
    $('#medical_reports').addClass('active');
 
    //Medical reports datatables
-   table = $('#medical_reports_table').DataTable({
+   table = $('#test_data_table').DataTable({
       "lengthMenu": [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "All"]],
       dom: "<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
          "<'row'<'col-sm-12'tr>>" +
@@ -45,8 +46,9 @@ var antibiotic_count = $('#antibiotic_count').val();
       "serverSide": true,
       "order": [[1, "desc"]],
       "ajax": {
-         url: url("admin/testdata"),
+         url: url("admin/test_data"),
          data: function (data) {
+            console.log(data);
             data.filter_status = $('#filter_status').val();
             data.filter_barcode = $('#filter_barcode').val();
             data.filter_date = $('#filter_date').val();
@@ -57,22 +59,14 @@ var antibiotic_count = $('#antibiotic_count').val();
       },
       fixedHeader: true,
       "columns": [
-         { data: "bulk_checkbox", orderable: false, sortable: false },
-         { data: "id", orderable: true, sortable: true },
-         { data: "created_by_user.name", orderable: false, sortable: false },
-         { data: "contract.title", orderable: false, sortable: false },
-         { data: "barcode", orderable: false, sortable: false },
-         { data: "patient.code", orderable: false, sortable: false },
-         { data: "patient.name", orderable: false, sortable: false },
-         { data: "patient.gender", orderable: false, sortable: false },
-         { data: "patient.age", searchable: false, orderable: false, sortable: false },
-         { data: "patient.phone", orderable: false, sortable: false },
-         { data: "tests", searchable: false, orderable: false, sortable: false },
-         { data: "created_at", searchable: false, orderable: true, sortable: true },
-         { data: "done", searchable: false, sortable: false, orderable: false },
-         { data: "signed", searchable: false, sortable: false, orderable: false },
-         { data: "signed_by_user.name", orderable: false, sortable: false },
-         { data: "action", searchable: false, sortable: false, orderable: false },
+         // { data: "bulk_checkbox", orderable: false, sortable: false },
+         // { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+         { data: 'DEVICE_ID1', name: 'DEVICE_ID1' },
+         { data: 'PATIENT_ID_OPT', name: 'PATIENT_ID_OPT' },
+
+         { data: 'PATIENT_NAME', name: 'PATIENT_NAME' },
+         { data: 'RESULT_TEST_ID', name: 'RESULT_TEST_ID' },
+         { data: "action", searchable: false, orderable: false, sortable: false }//action
       ],
       "language": {
          "sEmptyTable": trans("No data available in table"),
@@ -533,3 +527,92 @@ function add_antibiotic(antibiotics, el) {
 
 }
 
+
+
+function transferData(id) {
+
+   jQuery.ajax({
+
+      url: url("admin/testdata/cekpasien"),
+      data: {
+         'pasien_id': id
+      },
+      dataType: 'json',
+
+      success: function (response) {
+         if (response.status == 'tidak ada') {
+
+            Swal.fire({
+               title: 'Informasi',
+               text: response.pesan,
+               icon: 'warning',
+            });
+
+         } else {
+            function loadTableData(id) {
+               // Load the table data via AJAX and insert it into the SweetAlert modal
+               jQuery.ajax({
+                  url: url("admin/testdata/loadtabledata"),
+                  dataType: 'html',
+                  data: {
+                     'pasien_id': id
+                  },
+                  success: function (data) {
+                     Swal.fire({
+                        title: 'Informasi',
+                        html: '<div id="tableContainer">' + data + '</div>', // Container for the table
+                        text: response.pesan,
+                        icon: 'warning',
+                        customClass: {
+                           container: 'custom-swal-width' // Apply the custom CSS class to the modal
+                        },
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, transfer !'
+                     }).then((result) => {
+                        if (result.isConfirmed) {
+                           // Handle the transfer action if needed
+                           var selectedData = [];
+                           jQuery('input[name="pilih[]"]:checked').each(function () {
+                              selectedData.push(jQuery(this).val());
+                           });
+                           console.log(selectedData);
+
+                           // Now you can use the selectedData array to send the data via AJAX or perform other actions
+                           if (selectedData.length > 0) {
+                              jQuery.ajax({
+                                 url: url("admin/testdata/senddata"),
+                                 method: 'POST',
+                                 data: {
+                                    selectedData: selectedData,
+                                    pasien_id: id
+                                 },
+                                 success: function (response) {
+                                    Swal.fire('Success', 'Data has been transferred.', 'success');
+                                 },
+                                 error: function () {
+                                    Swal.fire('Error', 'Failed to transfer data.', 'error');
+                                 }
+                              });
+                           } else {
+                              Swal.fire('Info', 'No checkboxes are selected.', 'info');
+                           }
+                        }
+                     });
+                  },
+                  error: function () {
+                     Swal.fire('Error', 'Failed to load table data', 'error');
+                  }
+               });
+            }
+
+            loadTableData(id);
+
+
+         }
+
+
+      },
+   });
+}
