@@ -26,8 +26,40 @@
             </p>
         </a>
       </li>
+@canany(['view_test_data_1','view_test_data_2'])
+      <li class="nav-item has-treeview" id="testdata">
+        <a href="#" class="nav-link" id="test_data_link">
+          <i class="nav-icon fas fa-bars"></i>
+          <p>
+            {{__('List Data')}}
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
 
-       @can('view_group')
+          @can('view_test_data_1')
+          <li class="nav-item">
+            <a href="{{route('admin.testdata.index')}}" class="nav-link" id="test_data_1">
+              <i class="far fa-circle nav-icon"></i>
+              <p>{{__('Test Data 1')}}</p>
+            </a>
+          </li>
+          @endcan
+          
+          @can('view_test_data_2')
+          <li class="nav-item">
+            <a href="{{route('admin.prices.cultures')}}" class="nav-link" id="test_data_2">
+              <i class="far fa-circle nav-icon"></i>
+              <p>{{__('Test Data 2')}}</p>
+            </a>
+          </li>
+          @endcan
+
+        
+        </ul>
+      </li>
+      @endcan
+       {{-- @can('view_group')
       <li class="nav-item">
         <a href="{{route('admin.testdata.index')}}" class="nav-link" id="groups">
           <i class="nav-icon fas fa-bars"></i>
@@ -36,7 +68,7 @@
           </p>
         </a>
       </li>
-      @endcan
+      @endcan --}}
 
        {{-- @can('view_group')
       <li class="nav-item">

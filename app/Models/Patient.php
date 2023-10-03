@@ -15,7 +15,7 @@ class Patient extends Authenticatable
     use SoftDeletes;
     use HasApiTokens;
     use LogsActivity;
-    
+    // public $code;
     public $guarded=[];
     public $appends=['age','total','paid','due'];
 
@@ -88,6 +88,15 @@ class Patient extends Authenticatable
 
         return $paid;
     }
+
+    //   public function getCodeAttribute()
+    // {
+    //     // $code=$this->code;
+
+    //     return $this->code;
+    // }
+
+    
 
     public function getDueAttribute()
     {

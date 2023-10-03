@@ -51,6 +51,10 @@ class PatientsController extends Controller
         ->editColumn('total',function($patient){
             return formated_price($patient['total']);
         })
+
+         ->editColumn('code',function($patient){
+            return $patient['code'];
+        })
         ->editColumn('paid',function($patient){
             return formated_price($patient['paid']);
         })
@@ -84,14 +88,15 @@ class PatientsController extends Controller
      */
     public function store(PatientRequest $request)
     {
+       
         $patient=Patient::create($request->except('token','age','age_unit','avatar'));
-
+//  dd($patient['code']);
         $patient->update([
             'contract_id'=>(isset($request['contract_id']))?$request['contract_id']:null,
             'country_id'=>(isset($request['country_id']))?$request['country_id']:null,
         ]);
 
-        patient_code($patient['id']);
+        // patient_code($patient['id']);
 
         if($request->hasFile('avatar'))
         {
@@ -103,8 +108,8 @@ class PatientsController extends Controller
         }
 
         //send patient code notification
-        $patient=Patient::find($patient['id']);
-        send_notification('patient_code',$patient);
+        // $patient=Patient::find($patient['id']);
+        // send_notification('patient_code',$patient);
 
         session()->flash('success','Patient created successfully');
 

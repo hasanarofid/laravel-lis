@@ -39,10 +39,21 @@
         </div>
 
     </div>
-
     <div class="col-lg-10">
 
         <div class="row">
+         <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa fa-code"></i>
+                        </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="{{__('Patient Code')}}" name="code" id="code" @if(isset($patient)) value="{{$patient->code}}" @elseif(old('code')) value="{{old('code')}}" @endif required>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-lg-4">
                 <div class="form-group">

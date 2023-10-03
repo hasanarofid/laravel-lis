@@ -31,9 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('detail/{id}', 'TestdataController@detail')->name('detail');
         Route::get('edit/{id}', 'TestdataController@edit')->name('edit');
         Route::get('loadtabledata', 'TestdataController@loadtabledata')->name('loadtabledata');
-        Route::post('update', 'TestdataController@update')->name('update');
+        Route::post('update/{id}', 'TestdataController@update')->name('update');
         Route::post('senddata', 'TestdataController@senddata')->name('senddata');
-        Route::post('testdata/bulk/delete', 'TestdataController@bulk_delete')->name('destroy');
+        Route::post('testdata/bulk/delete/{id}', 'TestdataController@bulk_delete')->name('destroy');
         Route::get('cekpasien', 'TestdataController@cekpasien')->name('cekpasien');
     });
 
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('tests_export', 'TestsController@export')->name('tests.export');
     Route::get('tests_download_template', 'TestsController@download_template')->name('tests.download_template');
     Route::post('tests_import', 'TestsController@import')->name('tests.import');
-    Route::post('tests/bulk/delete', 'TestsController@bulk_delete')->name('tests.bulk_delete');
+    // Route::post('tests/bulk/delete', 'TestsController@bulk_delete')->name('tests.bulk_delete');
 
     //cultures
     Route::resource('cultures', 'CulturesController');

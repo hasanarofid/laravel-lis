@@ -489,13 +489,14 @@ class MedicalReportsController extends Controller
      */
     public function sign($id)
     {
+        // dd(auth()->guard('admin')->user()->signature);
         $group = Group::where('id', $id)->firstOrFail();
 
         $group->update([
             'uploaded_report' => false
         ]);
 
-        if (!empty(auth()->guard('admin')->user()->signature)) {
+        // if (!empty(auth()->guard('admin')->user()->signature)) {
             //add signature
             $group->update([
                 'signed_by' => auth()->guard('admin')->user()->id
@@ -518,22 +519,25 @@ class MedicalReportsController extends Controller
                 })->where('group_id', $group['id'])->get();
             }
 
-            // $pdf = generate_pdf([
-            //     'group' => $group,
-            //     'categories' => $categories
-            // ]);
+            $pdf = generate_pdf([
+                'group' => $group,
+                'categories' => $categories
+            ]);
 
-            // if (isset($pdf)) {
-            //     $group->update(['report_pdf' => $pdf]);
-            // }
-
-            //send notification to patient
+            if (isset($pdf)) {
+                $group->update(['report_pdf' => $pdf]);
+            }
+            	// dd($group["doctor"]["phone"]);
+// dd($group['report_pdf']);
+            // send notification to patient
+         $wa =    whatsapp_notification($group['doctor'],'report');
+    // dd($wa);
             // send_notification('tests_notification', $group['patient']);
 
             session()->flash('success', __('Report signed successfully'));
 
             return redirect()->back();
-        }
+        // }
 
         session()->flash('failed', __('Please select your signature first'));
 

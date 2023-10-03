@@ -12,8 +12,8 @@
 
 {{-- @can('delete_patient') --}}
     <form method="POST" action="{{route('admin.testdata.destroy',$patient['PATIENT_ID_OPT'])}}" class="d-inline">
-        <input type="hidden" name="_method" value="delete">
-        <button data-tooltip="Hapus Test Data" type="submit" class="btn btn-danger btn-sm delete_patient">
+        <input type="hidden" name="_method" value="post">
+        <button data-tooltip="Hapus Test Data" type="submit" class="btn btn-danger btn-sm delete_testdata">
             <i class="fa fa-trash"></i>
         </button>
     </form>

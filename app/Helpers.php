@@ -1512,13 +1512,22 @@ if (!function_exists("whatsapp_notification")) {
 	{
 		goto LAJBj;
 		ve4lW:
-		$url = "https://wa.me/" . $group["patient"]["phone"] . "?text=" . $message;
+		if (isset($group["doctor"]["phone"])) {
+    $phone = $group["doctor"]["phone"];
+    
+    // You can access $phone and use it here safely.
+    $url = "https://wa.me/" . $phone . "?text=" . $message;
+} else {
+	$url = null;
+    // Handle the case where $group["doctor"]["phone"] is null or doesn't exist.
+    // You can provide a default value, log an error, or handle it in an appropriate way.
+}
 		goto Rsisb;
 		Rsisb:
 		return $url;
 		goto xTU3l;
 		AJINi:
-		$url = "https://wa.me/" . $group["patient"]["phone"] . "?text=" . $message;
+		$url = "https://wa.me/" . $group["doctor"]["phone"] . "?text=" . $message;
 		goto uI249;
 		lahyX:
 		goto HdCiL;
@@ -1527,10 +1536,14 @@ if (!function_exists("whatsapp_notification")) {
 		return $url;
 		goto wipQs;
 		OxlF8:
+		$doctor_name = $group["doctor"]["name"] ?? ''; // Using the null coalescing operator
+$reportLink = $group["report_pdf"] ?? '';
+$messageTemplate = $whatsapp["report"]["message"] ?? '';
+
 		$message = str_replace(
 			["{patient_name}", "{report_link}"],
-			[$group["patient"]["name"], $group["report_pdf"]],
-			$whatsapp["report"]["message"]
+			[$doctor_name, $reportLink],
+			$messageTemplate
 		);
 		goto ve4lW;
 		WcM0q:
@@ -1549,7 +1562,7 @@ if (!function_exists("whatsapp_notification")) {
 		vYmbB:
 		$message = str_replace(
 			["{patient_name}", "{receipt_link}"],
-			[$group["patient"]["name"], $group["receipt_pdf"]],
+			[$group["doctor"]["name"], $group["receipt_pdf"]],
 			$whatsapp["receipt"]["message"]
 		);
 		goto AJINi;

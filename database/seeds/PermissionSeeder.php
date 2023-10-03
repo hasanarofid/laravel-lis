@@ -517,6 +517,27 @@ class PermissionSeeder extends Seeder
         ]
         );
 
+        //test data
+        $test_data_module=Module::Create([
+            'name'=>'test data'
+        ]);
+
+        Permission::insert(
+        [
+            [
+                'module_id'=>$test_data_module['id'],
+                'key'=>'view_test_data_1',
+                'name'=>'View Test Data 1'
+            ],
+       
+            [
+                'module_id'=>$test_data_module['id'],
+                'key'=>'view_test_data_2',
+                'name'=>'View Test Data 2'
+            ],
+        ]
+        );
+
        
 
         //accounting

@@ -18,7 +18,6 @@ class TestdataController extends Controller
     //     $this->middleware('can:view_testdata',     ['only' => ['index', 'show']]);
     //     $this->middleware('can:create_testdata',   ['only' => ['create', 'store']]);
     //     $this->middleware('can:edit_testdata',     ['only' => ['edit', 'update']]);
-    //     $this->middleware('can:delete_testdata',   ['only' => ['destroy', 'bulk_delete']]);
     //     $this->middleware('can:sign_testdata',   ['only' => ['sign']]);
     // }
 
@@ -40,17 +39,7 @@ class TestdataController extends Controller
 
 
             return DataTables::eloquent($model)
-                // ->addColumn('action', function ($row) {
-
-                //     //  dd($row->ID);  
-                //     $btn = '<a href="' . route('testdata.detail', array('id' => $row->PATIENT_ID_OPT)) . '" data-toggle="tooltip"  class="edit btn btn-primary btn-sm ">Detail</a>';
-                //     // $btn = $btn . ' <a href="' . route('test_data.edit', $row->PATIENT_ID_OPT) . '" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-warning btn-sm deletePost">Edit</a>';
-                //     // $btn = $btn . ' <a href="' . route('test_data.hapus', $row->PATIENT_ID_OPT) . '" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
-                //     $btn = $btn . '<a href="#"  onclick="transferData(\'' . $row->PATIENT_ID_OPT . '\')"   class="btn btn-sm bg-info text-white" ><i class="fa fa-send-o" aria-hidden="true"></i>&nbsp;&nbsp;Transfer Order</a>';
-
-                //     return $btn;
-                // })
-                // ->rawColumns(['action'])
+              
                 ->addColumn('action', function ($patient) {
                     return view('admin.testdata._action', compact('patient'));
                 })
@@ -105,6 +94,20 @@ class TestdataController extends Controller
         return response()->json($data);
     }
 
+    public function edit($id){
+        $model = Testdata::where('PATIENT_ID_OPT', $id)->first();
+        $data = Testdata::where('PATIENT_ID_OPT', $id)->get();
+     
+        return view('admin.testdata.edit', compact('model','data'));
+    }
+
+    public function detail($id){
+        $model = Testdata::where('PATIENT_ID_OPT', $id)->first();
+        $data = Testdata::where('PATIENT_ID_OPT', $id)->get();
+     
+        return view('admin.testdata.detail', compact('model','data'));
+    }
+
     //loadtabledata
     public function loadtabledata(Request $request)
     {
@@ -123,6 +126,37 @@ class TestdataController extends Controller
 
         // dd($tableData);
         return view('admin.testdata.table-view', compact('tableData'));
+    }
+
+    public function update($id,Request $request){
+       
+          $data = Testdata::where('PATIENT_ID_OPT', $id)->get();
+$timestamp = now();
+    foreach($request['id'] as $key=>$value){
+              Testdata::where('ID', $value)
+                    ->update([
+                        'TIMESTAMP' => $timestamp,
+                        'DATE_TIME_STAMP' => $timestamp,
+                        'RESULT_VALUE' => !empty($request['result'][$key]) ? $request['result'][$key] : null,
+                        'RESULT_DATE' => $timestamp,
+                    ]);
+    }
+
+        session()->flash('success',__('Test update successfully'));
+
+        return redirect()->route('admin.testdata.index');
+
+    }
+
+    //bulk_delete
+    public function bulk_delete($id){
+        // dd($id);
+                $model = Testdata::where('PATIENT_ID_OPT', $id)->delete();
+                session()->flash('success',__('Test delete successfully'));
+
+        return redirect()->route('admin.testdata.index');
+
+
     }
 
 
