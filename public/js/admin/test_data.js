@@ -10,7 +10,16 @@ var count = 0;
 
    $('#testdata').addClass('menu-open');
    $('#test_data_link').addClass('active');
-   $('#test_data_1').addClass('active');
+
+   var currentUrl = window.location.href;
+   console.log("url " + currentUrl);
+   // Tentukan submenu mana yang harus diberi kelas aktif berdasarkan URL
+   if (currentUrl.includes('/testdata/index/XN-450')) {
+      $('#test_data_1').addClass('active');
+   } else if (currentUrl.includes('/testdata/index/CST-180')) {
+      $('#test_data_2').addClass('active');
+   }
+   // $('#test_data_1').addClass('active');
    // $('#tests_prices').addClass('active');
 
    //Medical reports datatables
@@ -54,7 +63,6 @@ var count = 0;
       },
       fixedHeader: true,
       "columns": [
-         { data: 'DEVICE_ID1', name: 'DEVICE_ID1' },
          { data: 'PATIENT_ID_OPT', name: 'PATIENT_ID_OPT' },
 
          { data: 'PATIENT_NAME', name: 'PATIENT_NAME' },

@@ -28,24 +28,49 @@ class TestdataController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $model = Testdata::select('PATIENT_ID_OPT', 'DEVICE_ID1', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
-                ->groupBy('PATIENT_ID_OPT', 'DEVICE_ID1', 'PATIENT_NAME');
-            // ->get();
+        $device = $request->device;
 
+    if ($request->ajax()) {
+        $model = Testdata::select('PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+            ->groupBy('PATIENT_ID_OPT', 'PATIENT_NAME');
 
-
-
-
-
-            return DataTables::eloquent($model)
-              
-                ->addColumn('action', function ($patient) {
-                    return view('admin.testdata._action', compact('patient'));
-                })
-                ->toJson();
+        if (!empty($device)) {
+            $model->where('DEVICE_ID1', $device);
         }
-        return view('admin.testdata.index');
+
+        return DataTables::eloquent($model)
+            ->addColumn('action', function ($patient) {
+                return view('admin.testdata._action', compact('patient'));
+            })
+            ->toJson();
+    }
+    //     // dd($request->device);
+    //     $device = !empty($request->device) ? $request->device :null;
+    //     // dd($device);
+    //     if ($request->ajax()) {
+    //         $model = Testdata::select('PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+    // ->where('DEVICE_ID1', $device)
+    // ->groupBy('PATIENT_ID_OPT', 'PATIENT_NAME');
+    // // ->get();
+
+    //         // $model = Testdata::select('PATIENT_ID_OPT', 'DEVICE_ID1', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+    //         //     ->where('DEVICE_ID1',$device)
+    //         //      ->groupBy('PATIENT_ID_OPT', 'DEVICE_ID1', 'PATIENT_NAME')
+    //         // ->get();
+
+    //         // dd($data);
+
+
+
+
+    //         return DataTables::eloquent($model)
+              
+    //             ->addColumn('action', function ($patient) {
+    //                 return view('admin.testdata._action', compact('patient'));
+    //             })
+    //             ->toJson();
+    //     }
+        return view('admin.testdata.index',compact('device'));
     }
 
 

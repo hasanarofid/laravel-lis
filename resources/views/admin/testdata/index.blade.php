@@ -1,7 +1,6 @@
 @extends('layouts.app')
-
 @section('title')
-{{ __('Test data') }}
+{{ __('Test data') }} -  {{ $device }}
 @endsection
 
 @section('breadcrumb')
@@ -11,13 +10,13 @@
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">
                     <i class="fa fa-flag"></i>
-                    {{__('Test data')}}
+                    {{__('Test data')}} -  {{ $device }}
                 </h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('admin.index')}}">{{__('Home')}}</a></li>
-                    <li class="breadcrumb-item active">{{ __('Test data') }}</li>
+                    <li class="breadcrumb-item active">{{ __('Test data') }} -  {{ $device }}</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -28,7 +27,7 @@
 @section('content')
 <div class="card card-primary card-outline">
     <div class="card-header">
-        <h3 class="card-title">{{ __('Test data table') }}</h3>
+        <h3 class="card-title">{{ __('Test data table') }} -  {{ $device }}</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -39,7 +38,6 @@
                     <thead>
                         <tr>
                        
-                            <th width="10px">DEVICE ID</th>
                             <th width="10px">PATIENT ID</th>
                             <th width="10px">PATIENT NAME</th>
                             <th width="100px">JUMLAH RESULT TEST ID</th>
