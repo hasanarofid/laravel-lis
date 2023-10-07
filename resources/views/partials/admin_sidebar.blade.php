@@ -39,7 +39,7 @@
 
           @can('view_test_data_1')
           <li class="nav-item">
-            <a href="{{route('admin.testdata.index',['device'=>'XN-450'])}}" class="nav-link" id="test_data_1">
+            <a href="{{route('admin.testdata.index')}}" class="nav-link" id="test_data_1">
               <i class="far fa-circle nav-icon"></i>
               <p>{{__('Test Data 1')}}</p>
             </a>
@@ -48,7 +48,7 @@
           
           @can('view_test_data_2')
           <li class="nav-item">
-          <a href="{{route('admin.testdata.index',['device'=>'CST-180'])}}" class="nav-link" id="test_data_2">
+          <a href="{{route('admin.testdata1.index')}}" class="nav-link" id="test_data_2">
               <i class="far fa-circle nav-icon"></i>
               <p>{{__('Test Data 2')}}</p>
             </a>

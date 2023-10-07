@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TestData;
+use App\Models\TestData1;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 
-class TestdataController extends Controller
+class Testdata1Controller extends Controller
 {
     /**
      * assign roles
@@ -28,46 +28,22 @@ class TestdataController extends Controller
      */
     public function index(Request $request)
     {
+        $device = $request->device;
 
     if ($request->ajax()) {
-        $model = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+          $model = TestData1::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
             ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME');
 
   
 
         return DataTables::eloquent($model)
             ->addColumn('action', function ($patient) {
-                return view('admin.testdata._action', compact('patient'));
+                return view('admin.testdata1._action', compact('patient'));
             })
             ->toJson();
     }
-    //     // dd($request->device);
-    //     $device = !empty($request->device) ? $request->device :null;
-    //     // dd($device);
-    //     if ($request->ajax()) {
-    //         $model = Testdata::select('PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
-    // ->where('DEVICE_ID1', $device)
-    // ->groupBy('PATIENT_ID_OPT', 'PATIENT_NAME');
-    // // ->get();
-
-    //         // $model = Testdata::select('PATIENT_ID_OPT', 'DEVICE_ID1', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
-    //         //     ->where('DEVICE_ID1',$device)
-    //         //      ->groupBy('PATIENT_ID_OPT', 'DEVICE_ID1', 'PATIENT_NAME')
-    //         // ->get();
-
-    //         // dd($data);
-
-
-
-
-    //         return DataTables::eloquent($model)
-              
-    //             ->addColumn('action', function ($patient) {
-    //                 return view('admin.testdata._action', compact('patient'));
-    //             })
-    //             ->toJson();
-    //     }
-        return view('admin.testdata.index');
+    //     
+        return view('admin.testdata1.index',compact('device'));
     }
 
 
@@ -117,17 +93,17 @@ class TestdataController extends Controller
     }
 
     public function edit($id){
-        $model = Testdata::where('PATIENT_ID_OPT', $id)->first();
-        $data = Testdata::where('PATIENT_ID_OPT', $id)->get();
+        $model = TestData1::where('PATIENT_ID_OPT', $id)->first();
+        $data = TestData1::where('PATIENT_ID_OPT', $id)->get();
      
-        return view('admin.testdata.edit', compact('model','data'));
+        return view('admin.testdata1.edit', compact('model','data'));
     }
 
     public function detail($id){
-        $model = Testdata::where('PATIENT_ID_OPT', $id)->first();
-        $data = Testdata::where('PATIENT_ID_OPT', $id)->get();
+        $model = TestData1::where('PATIENT_ID_OPT', $id)->first();
+        $data = TestData1::where('PATIENT_ID_OPT', $id)->get();
      
-        return view('admin.testdata.detail', compact('model','data'));
+        return view('admin.testdata1.detail', compact('model','data'));
     }
 
     //loadtabledata
@@ -147,12 +123,12 @@ class TestdataController extends Controller
             ->get();
 
         // dd($tableData);
-        return view('admin.testdata.table-view', compact('tableData'));
+        return view('admin.testdata1.table-view', compact('tableData'));
     }
 
     public function update($id,Request $request){
        
-          $data = Testdata::where('PATIENT_ID_OPT', $id)->get();
+          $data = TestData1::where('PATIENT_ID_OPT', $id)->get();
 $timestamp = now();
     foreach($request['id'] as $key=>$value){
               Testdata::where('ID', $value)
@@ -166,17 +142,17 @@ $timestamp = now();
 
         session()->flash('success',__('Test update successfully'));
 
-        return redirect()->route('admin.testdata.index');
+        return redirect()->route('admin.testdata1.index');
 
     }
 
     //bulk_delete
     public function bulk_delete($id){
         // dd($id);
-                $model = Testdata::where('PATIENT_ID_OPT', $id)->delete();
+                $model = TestData1::where('PATIENT_ID_OPT', $id)->delete();
                 session()->flash('success',__('Test delete successfully'));
 
-        return redirect()->route('admin.testdata.index');
+        return redirect()->route('admin.testdata1.index');
 
 
     }
@@ -199,7 +175,7 @@ $timestamp = now();
                 ->get();
             // dd($cek);
             foreach ($cek as $order) {
-                $value = Testdata::where('PATIENT_ID_OPT', (int)$request->pasien_id)
+                $value = TestData1::where('PATIENT_ID_OPT', (int)$request->pasien_id)
                     ->where('RESULT_TEST_ID', $order->name)->first();
                 DB::table('group_test_results as t')
                     ->join('group_tests as g', 'g.id', '=', 't.group_test_id')

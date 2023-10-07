@@ -10,8 +10,9 @@ var count = 0;
 
    $('#testdata').addClass('menu-open');
    $('#test_data_link').addClass('active');
-
-   $('#test_data_1').addClass('active');
+   $('#test_data_2').addClass('active');
+   // $('#test_data_1').addClass('active');
+   // $('#tests_prices').addClass('active');
 
    //Medical reports datatables
    table = $('#test_data_table').DataTable({
@@ -56,6 +57,7 @@ var count = 0;
       "columns": [
          { data: 'DEVICE_ID1', name: 'DEVICE_ID1' },
          { data: 'PATIENT_ID_OPT', name: 'PATIENT_ID_OPT' },
+
 
          { data: 'PATIENT_NAME', name: 'PATIENT_NAME' },
          { data: 'RESULT_TEST_ID', name: 'RESULT_TEST_ID' },
@@ -240,7 +242,7 @@ function transferData(id) {
 
    jQuery.ajax({
 
-      url: url("admin/testdata1/cekpasien"),
+      url: url("admin/testdata/cekpasien"),
       data: {
          'pasien_id': id
       },
@@ -259,7 +261,7 @@ function transferData(id) {
             function loadTableData(id) {
                // Load the table data via AJAX and insert it into the SweetAlert modal
                jQuery.ajax({
-                  url: url("admin/testdata1/loadtabledata"),
+                  url: url("admin/testdata/loadtabledata"),
                   dataType: 'html',
                   data: {
                      'pasien_id': id
@@ -289,7 +291,7 @@ function transferData(id) {
                            // Now you can use the selectedData array to send the data via AJAX or perform other actions
                            if (selectedData.length > 0) {
                               jQuery.ajax({
-                                 url: url("admin/testdata1/senddata"),
+                                 url: url("admin/testdata/senddata"),
                                  method: 'POST',
                                  data: {
                                     selectedData: selectedData,
