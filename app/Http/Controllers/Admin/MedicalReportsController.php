@@ -24,6 +24,7 @@ use App;
 use DataTables;
 use Illuminate\Support\Facades\Log;
 use PDF;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class MedicalReportsController extends Controller
 {
@@ -530,7 +531,7 @@ class MedicalReportsController extends Controller
             	// dd($group["doctor"]["phone"]);
 // dd($group['report_pdf']);
             // send notification to patient
-         $wa =    whatsapp_notification($group['doctor'],'report');
+         $wa =    $this->sendPdfDokter($group);
     // dd($wa);
             // send_notification('tests_notification', $group['patient']);
 
@@ -543,6 +544,22 @@ class MedicalReportsController extends Controller
 
         return redirect()->back();
     }
+
+public function sendPdfDokter($group)
+{
+    // dd(config('nexmo.sms_from'));
+    $pdfUrl =$group["report_pdf"];
+
+    Nexmo::message()->send([
+        'to' => $group["doctor"]["phone"], // Nomor penerima
+        'from' => '62881026697527', // Nomor pengirim
+        'text' => 'Ini adalah dokumen PDF Anda: ' . $pdfUrl,
+    ]);
+
+    return "Pesan dengan dokumen PDF terkirim.";
+}
+
+
 
     /**
      * Send report

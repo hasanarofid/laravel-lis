@@ -243,6 +243,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'PDFMerger' => Webklex\PDFMerger\Facades\PDFMergerFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
     ],
 
 ];
