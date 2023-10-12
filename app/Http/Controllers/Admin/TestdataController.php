@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TestData;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use App\Events\TestDataOtomatis;
 
 class TestdataController extends Controller
 {
@@ -26,9 +27,17 @@ class TestdataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function cekTestDataOtomatis(){
+        $testdata = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+            ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME');
+        // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
+        event(new TestDataOtomatis($testdata));
+    }
+
     public function index(Request $request)
     {
 
+        $this->cekTestDataOtomatis();
     if ($request->ajax()) {
         $model = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
             ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME');
