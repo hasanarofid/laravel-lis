@@ -53,6 +53,7 @@
                 <a class="nav-link"  data-toggle="pill" href="#sms_settings" role="tab" aria-controls="sms_settings" aria-selected="true"><i class="fas fa-sms"></i> {{__('SMS')}}</a>
                 <a class="nav-link"  data-toggle="pill" href="#whatsapp_settings" role="tab" aria-controls="whatsapp_settings" aria-selected="true"><i class="fab fa-whatsapp"></i> {{__('Whatsapp')}}</a>
                 <a class="nav-link"  data-toggle="pill" href="#api_keys_settings" role="tab" aria-controls="api_keys_settings" aria-selected="true"><i class="fas fa-key"></i> {{__('Api Keys')}}</a>
+                <a class="nav-link"  data-toggle="pill" href="#transfer_otomatis_settings" role="tab" aria-controls="transfer_otomatis_settings" aria-selected="true"><i class="fa fa-paper-plane"></i> Transfer Otomatis</a>
               </div>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
@@ -1984,6 +1985,51 @@
                       </div>
                 </div>
                 <!-- \Api Keys Settings -->
+
+
+                    <!-- Transfer Otomatis settings -->
+                <div class="tab-pane text-left fade show" id="transfer_otomatis_settings" role="tabpanel" aria-labelledby="transfer_otomatis_settings">
+                  <div class="card card-primary">
+                      <div class="card-header">
+                        <h3 class="card-title">Transfer Otomatis Setting</h3>
+                      </div>
+                      <form action="{{route('admin.settings.transfer_otomatis_settings')}}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          <div class="card-body">
+                             <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="card card-primary card-tabs">
+                                  <div class="card-header p-0 pt-1">
+                                     
+                                  </div>
+                                  <div class="card-body">
+                                      <div class="tab-content" id="custom-tabs-one-tabContent">
+                                        <div class="tab-pane fade show active" >
+                                            <div class="row">
+                                              <div class="form-group">
+                                                <input name="status" type="checkbox" @if($transfer_otomatis_settings['status']) checked @endif netliva-switch data-active-text="{{__('Active')}}" data-passive-text=" {{__('Deactive')}}"/>
+                                              </div>
+                                            </div>
+                                                        
+                                        </div>
+                                        
+                                        
+                                      </div>
+                                  </div>
+                                  <!-- /.card -->
+                                  </div>
+                              
+                              </div>
+                          </div>
+                          </div>
+                          <!-- /.card-body -->
+                          <div class="card-footer">
+                              <button class="btn btn-primary"> <i class="fa fa-check"></i> {{__('Save')}}</button>
+                          </div>
+                      </form>
+                  </div>
+                </div>
+                <!-- \Transfer Otomatis settings Settings -->
 
             </div>
           </div>

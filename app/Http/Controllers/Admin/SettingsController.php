@@ -65,6 +65,8 @@ class SettingsController extends Controller
 
         $report_branches=Branch::all();
 
+        $transfer_otomatis_settings=setting('transfer_otomatis_settings');
+    // dd($transfer_otomatis_settings);
         return view('admin.settings.index',compact(
             'settings',
             'currencies',
@@ -75,7 +77,8 @@ class SettingsController extends Controller
             'whatsapp_settings',
             'api_keys_settings',
             'timezone_settings',
-            'report_branches'
+            'report_branches',
+            'transfer_otomatis_settings'
         ));
         
     }
@@ -286,6 +289,20 @@ class SettingsController extends Controller
         return redirect()->route('admin.settings.index');
     }
 
+    public function transfer_otomatis_settings(Request $request){
+        $status = ($request->status == 'on') ? true : false;
+          $api_keys=[];
+        $api_keys['status']= $status;
+
+          $transfer_otomatis_settings=Setting::where('key','transfer_otomatis_settings')->firstOrFail();
+         $transfer_otomatis_settings->update([
+            'value'=>json_encode($api_keys)
+        ]);
+            //   dd($transfer_otomatis_settings);
+       session()->flash('success',__('Settings Updated successfully'));
+       
+        return redirect()->route('admin.settings.index');
+    }
 
     /**
      * update api keys settings

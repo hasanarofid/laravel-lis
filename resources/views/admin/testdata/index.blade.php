@@ -30,8 +30,11 @@
         <h3 class="card-title">{{ __('Test data table') }} </h3>
     </div>
     <!-- /.card-header -->
-    <div class="card-body">
-      
+  @if(session()->has('success_transfer'))
+    <div class="alert alert-success">
+        {{ session('success_transfer') }}
+    </div>
+@endif
         <div class="row">
             <div class="col-lg-12 table-responsive">
                 <table id="test_data_table" class="table table-striped table-bordered"  width="100%">

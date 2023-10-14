@@ -219,6 +219,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::post('whatsapp', 'SettingsController@whatsapp_submit')->name('whatsapp_submit');
         Route::post('api_keys', 'SettingsController@api_keys_submit')->name('api_keys_submit');
         Route::post('barcode', 'SettingsController@barcode_submit')->name('barcode_submit');
+        Route::post('transfer_otomatis_settings', 'SettingsController@transfer_otomatis_settings')->name('transfer_otomatis_settings');
+
     });
 
     //inventory module

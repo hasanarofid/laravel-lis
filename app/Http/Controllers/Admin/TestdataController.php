@@ -29,15 +29,19 @@ class TestdataController extends Controller
      */
     public function cekTestDataOtomatis(){
         $testdata = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
-            ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME');
+            ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME')->get();
         // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
         event(new TestDataOtomatis($testdata));
     }
 
     public function index(Request $request)
     {
-
-        $this->cekTestDataOtomatis();
+        $transfer_otomatis_settings=setting('transfer_otomatis_settings');
+        // dd($transfer_otomatis_settings['status']);
+        if($transfer_otomatis_settings['status'] == true){
+            $this->cekTestDataOtomatis();
+        }
+      
     if ($request->ajax()) {
         $model = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
             ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME');
