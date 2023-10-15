@@ -32,6 +32,11 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
+    @if(session()->has('success_transfer'))
+    <div class="alert alert-success">
+        {{ session('success_transfer') }}
+    </div>
+@endif
         <!-- filter -->
         <div id="accordion">
             <div class="card card-info">

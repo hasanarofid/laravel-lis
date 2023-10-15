@@ -25,6 +25,9 @@ use DataTables;
 use Illuminate\Support\Facades\Log;
 use PDF;
 use Nexmo\Laravel\Facade\Nexmo;
+use App\Models\TestData;
+use Illuminate\Support\Facades\DB;
+use App\Events\TestDataOtomatis;
 
 class MedicalReportsController extends Controller
 {
@@ -39,7 +42,17 @@ class MedicalReportsController extends Controller
         $this->middleware('can:delete_medical_report',   ['only' => ['destroy', 'bulk_delete']]);
         $this->middleware('can:sign_medical_report',   ['only' => ['sign']]);
     }
-
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cekTestDataOtomatis(){
+        $testdata = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+            ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME')->get();
+        // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
+        event(new TestDataOtomatis($testdata));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +60,13 @@ class MedicalReportsController extends Controller
      */
     public function index(Request $request)
     {
+
+         $transfer_otomatis_settings=setting('transfer_otomatis_settings');
+        // dd($transfer_otomatis_settings['status']);
+        if($transfer_otomatis_settings['status'] == true){
+            $this->cekTestDataOtomatis();
+        }
+
         if ($request->ajax()) {
             $model = Group::query()
                 ->with('patient', 'tests', 'cultures', 'contract', 'signed_by_user', 'created_by_user')
@@ -279,13 +299,16 @@ class MedicalReportsController extends Controller
         }, 'all_cultures'])->where('id', $id)
             ->where('branch_id', session('branch_id'))
             ->firstOrFail();
+        $grouptest = GroupTest::where('group_id', $group->id)->first();
+            $status = GroupTestResult::where('group_test_id', $grouptest->id)->first();
+            // dd($status);
 
         $select_antibiotics = Antibiotic::all();
 
         $next = Group::where('id', '>', $id)->orderBy('id', 'asc')->first();
         $previous = Group::where('id', '<', $id)->orderBy('id', 'desc')->first();
 
-        return view('admin.medical_reports.edit', compact('group', 'select_antibiotics', 'next', 'previous'));
+        return view('admin.medical_reports.edit', compact('group', 'select_antibiotics', 'next', 'previous','status'));
     }
 
     /**
@@ -299,14 +322,23 @@ class MedicalReportsController extends Controller
     {
         // dd($request);
         try {
-            $group_test = GroupTest::where('id', $id)->firstOrFail();
 
+          
+            $group_test = GroupTest::where('id', $id)->firstOrFail();
+            // dd($group_test);
             $group = Group::where('id', $group_test['group_id'])
                 ->where('branch_id', session('branch_id'))
                 ->firstOrFail();
-
+        if(!empty($request['status'])){
+            // dd(1);
+               GroupTestResult::where('group_test_id', $group_test->id)->update([
+                'status' =>$request['status']
+                 ]);
+              
+            }
             $group->update([
-                'uploaded_report' => false
+                'uploaded_report' => false,
+                
             ]);
 
             GroupTest::where('id', $id)->update([

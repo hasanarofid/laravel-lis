@@ -284,6 +284,14 @@
                   </tr>
                 </tfoot>
               </table>
+               <div class="row">
+                <div class="col-lg-4">
+                          <div class="form-group">
+                            <label for="culture_option_status">Status</label>
+                            <input type="text" class="form-control" name="status" id="status" value="{{ $status->status  }}" >
+                          </div>
+                        </div>
+                </div>
 
             </form>
           </div>
@@ -301,7 +309,11 @@
        </h6>
       <!-- End check  tests selected -->
     @endif
-   
+    @php
+        // dd($group);
+
+    @endphp
+     
   </div>
   <!-- /.card-body -->
 </div>
@@ -337,6 +349,7 @@
             <div class="tab-pane" id="culture_{{$culture['id']}}">
               <form method="POST" action="{{route('admin.medical_reports.update_culture',$culture['id'])}}" class="culture_form">
                 @csrf
+                
                 <div class="row">
                   @foreach($culture['culture_options'] as $culture_option)
                       @if(isset($culture_option['culture_option']))
@@ -355,6 +368,7 @@
                   @endforeach
                 </div>
 
+             
                 <div class="card card-primary">
                   <div class="card-header">
                     <h5 class="card-title">
