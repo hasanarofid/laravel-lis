@@ -119,6 +119,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('medical_reports', 'MedicalReportsController');
     Route::post('medical_reports/upload_report/{id}', 'MedicalReportsController@upload_report')->name('medical_reports.upload_report');
     Route::post('medical_reports/pdf/{id}', 'MedicalReportsController@pdf')->name('medical_reports.pdf');
+    Route::post('medical_reports/print_status/{id}', 'MedicalReportsController@ubahStatus')->name('medical_reports.print_status');
+    
     Route::post('medical_reports/update_culture/{id}', 'MedicalReportsController@update_culture')->name('medical_reports.update_culture'); //update cultures
     Route::get('sign_medical_report/{id}', 'MedicalReportsController@sign')->name('medical_reports.sign');
     Route::get('medical_reports/print_report/{id}', 'MedicalReportsController@print_report')->name('medical_reports.print_report');

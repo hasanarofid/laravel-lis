@@ -42,6 +42,19 @@ class MedicalReportsController extends Controller
         $this->middleware('can:delete_medical_report',   ['only' => ['destroy', 'bulk_delete']]);
         $this->middleware('can:sign_medical_report',   ['only' => ['sign']]);
     }
+
+    // ubah status 
+    public function ubahStatus($id,Request $request){
+        // dd($request->status);
+          $grouptest = GroupTest::where('group_id', $id)->first();
+            $statusTest = GroupTestResult::where('group_test_id', $grouptest->id)->first();
+            $statusTest->status = $request->status;
+            $statusTest->save();
+
+                session()->flash('success', __('Medical report ubah status successfully'));
+        return redirect()->route('admin.medical_reports.index');
+    }
+
    /**
      * Display a listing of the resource.
      *
@@ -114,6 +127,9 @@ class MedicalReportsController extends Controller
                 })
                 ->editColumn('done', function ($group) {
                     return view('admin.medical_reports._status', compact('group'));
+                })
+                ->editColumn('transfer', function ($group) {
+                    return view('admin.medical_reports._transfer', compact('group'));
                 })
                 ->addColumn('action', function ($group) {
                     return view('admin.medical_reports._action', compact('group'));
@@ -329,13 +345,13 @@ class MedicalReportsController extends Controller
             $group = Group::where('id', $group_test['group_id'])
                 ->where('branch_id', session('branch_id'))
                 ->firstOrFail();
-        if(!empty($request['status'])){
-            // dd(1);
-               GroupTestResult::where('group_test_id', $group_test->id)->update([
-                'status' =>$request['status']
-                 ]);
+        // if(!empty($request['status'])){
+        //     // dd(1);
+        //        GroupTestResult::where('group_test_id', $group_test->id)->update([
+        //         'status' =>$request['status']
+        //          ]);
               
-            }
+        //     }
             $group->update([
                 'uploaded_report' => false,
                 

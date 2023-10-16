@@ -284,14 +284,14 @@
                   </tr>
                 </tfoot>
               </table>
-               <div class="row">
+               {{-- <div class="row">
                 <div class="col-lg-4">
                           <div class="form-group">
                             <label for="culture_option_status">Status</label>
                             <input type="text" class="form-control" name="status" id="status" value="{{ $status->status  }}" >
                           </div>
                         </div>
-                </div>
+                </div> --}}
 
             </form>
           </div>

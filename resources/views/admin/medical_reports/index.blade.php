@@ -116,6 +116,8 @@
                             <th width="100px">{{ __('Date') }}</th>
                             <th class="text-center" width="10px">{{__('Done')}}</th>
                             <th class="text-center" width="10px">{{__('Signed')}}</th>
+                            <th class="text-center" width="10px">Transfer</th>
+
                             <th class="text-center" width="10px">{{__('Signed By')}}</th>
                             <th width="50px">{{ __('Action') }}</th>
                         </tr>
@@ -130,6 +132,8 @@
     <!-- /.card-body -->
 </div>
 @include('admin.groups.modals.print_barcode')
+@include('admin.medical_reports.print_status')
+
 
 @endsection
 @section('scripts')
