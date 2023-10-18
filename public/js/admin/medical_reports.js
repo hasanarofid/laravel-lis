@@ -69,9 +69,10 @@ var antibiotic_count = $('#antibiotic_count').val();
             { data: "patient.phone", orderable: false, sortable: false },
             { data: "tests", searchable: false, orderable: false, sortable: false },
             { data: "created_at", searchable: false, orderable: true, sortable: true },
+            { data: "transfer", searchable: false, sortable: false, orderable: false },
+
             { data: "done", searchable: false, sortable: false, orderable: false },
             { data: "signed", searchable: false, sortable: false, orderable: false },
-            { data: "transfer", searchable: false, sortable: false, orderable: false },
 
             { data: "signed_by_user.name", orderable: false, sortable: false },
             { data: "action", searchable: false, sortable: false, orderable: false },

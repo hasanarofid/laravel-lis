@@ -59,16 +59,14 @@
         </ul>
       </li>
       @endcan
-       {{-- @can('view_group')
       <li class="nav-item">
-        <a href="{{route('admin.testdata.index')}}" class="nav-link" id="groups">
-          <i class="nav-icon fas fa-bars"></i>
+        <a href="{{route('admin.ruangan.index')}}" class="nav-link" id="groups">
+          <i class="nav-icon fas fa-home"></i>
           <p>
-            {{__('List Data')}}
+            {{__('Master Ruangan')}}
           </p>
         </a>
       </li>
-      @endcan --}}
 
        {{-- @can('view_group')
       <li class="nav-item">

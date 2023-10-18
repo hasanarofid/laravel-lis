@@ -114,9 +114,10 @@
                             <th width="50px">{{ __('Phone') }}</th>
                             <th width="200px">{{ __('Tests') }}</th>
                             <th width="100px">{{ __('Date') }}</th>
+                                                        <th class="text-center" width="10px">Transfer</th>
+
                             <th class="text-center" width="10px">{{__('Done')}}</th>
                             <th class="text-center" width="10px">{{__('Signed')}}</th>
-                            <th class="text-center" width="10px">Transfer</th>
 
                             <th class="text-center" width="10px">{{__('Signed By')}}</th>
                             <th width="50px">{{ __('Action') }}</th>

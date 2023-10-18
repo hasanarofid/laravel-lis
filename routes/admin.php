@@ -93,6 +93,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('antibiotics_download_template', 'AntibioticsController@download_template')->name('antibiotics.download_template');
     Route::post('antibiotics_import', 'AntibioticsController@import')->name('antibiotics.import');
     Route::post('antibiotics/bulk/delete', 'AntibioticsController@bulk_delete')->name('antibiotics.bulk_delete');
+    
+    //master ruangan
+Route::resource('ruangan', 'RuanganController');
+    Route::get('get_ruangan', 'RuanganController@ajax')->name('get_ruangan');
+    Route::get('ruangan_export', 'RuanganController@export')->name('ruangan.export');
+    Route::get('ruangan_download_template', 'RuanganController@download_template')->name('ruangan.download_template');
+    Route::post('ruangan_import', 'RuanganController@import')->name('ruangan.import');
+    Route::post('ruangan/bulk/delete', 'RuanganController@bulk_delete')->name('ruangan.bulk_delete');
 
     //patients
     Route::resource('patients', 'PatientsController');
