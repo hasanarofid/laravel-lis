@@ -32,11 +32,10 @@
       <h3 class="card-title">{{__('Edit Ruangan')}}</h3>
     </div>
     <!-- /.card-header -->
-    <form method="POST" action="{{route('admin.ruangan.update',$model->id)}}" id="package_form">
+    <form method="POST" action="{{ route('admin.ruangan.update',$model->id) }}" id="package_form">
      
    <input type="hidden" name="id" id="id" value="{{ $model->id  }}">
             @csrf
-            @method('post')
                         @include('admin.ruangan._form')
         <!-- /.card-body -->
 

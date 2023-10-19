@@ -67,6 +67,8 @@ var antibiotic_count = $('#antibiotic_count').val();
             { data: "patient.gender", orderable: false, sortable: false },
             { data: "patient.age", searchable: false, orderable: false, sortable: false },
             { data: "patient.phone", orderable: false, sortable: false },
+            { data: "ruangan", orderable: false, sortable: false },
+
             { data: "tests", searchable: false, orderable: false, sortable: false },
             { data: "created_at", searchable: false, orderable: true, sortable: true },
             { data: "transfer", searchable: false, sortable: false, orderable: false },

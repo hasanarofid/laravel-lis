@@ -155,6 +155,9 @@ Route::group(['prefix'=>'ajax','as'=>'ajax.','middleware'=>'Ajax'],function(){
 
     //get invoice tests
     Route::get('get_invoice_tests','AjaxController@get_invoice_tests')->name('get_invoice_tests')->middleware('Admin');
+    //get list ruangan
+    Route::get('get_list_ruangan','AjaxController@get_list_ruangan')->name('get_list_ruangan')->middleware('Admin');
+
 
     //get test
     Route::get('get_invoice_test','AjaxController@get_invoice_test')->name('get_invoice_test')->middleware('Admin');

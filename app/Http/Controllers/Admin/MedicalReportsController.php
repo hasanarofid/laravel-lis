@@ -118,6 +118,9 @@ class MedicalReportsController extends Controller
                 ->editColumn('patient.gender', function ($group) {
                     return __(ucwords($group['patient']['gender']));
                 })
+                         ->editColumn('ruangan',function($group){
+                return view('admin.medical_reports.ruangan',compact('group'));
+            })
                 ->editColumn('tests', function ($group) {
                     return view('admin.medical_reports._tests', compact('group'));
                 })

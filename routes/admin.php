@@ -97,7 +97,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //master ruangan
 Route::resource('ruangan', 'RuanganController');
     Route::get('get_ruangan', 'RuanganController@ajax')->name('get_ruangan');
-    Route::get('ruangan_export', 'RuanganController@export')->name('ruangan.export');
+    Route::get('ruangan_edit/{id}', 'RuanganController@edit')->name('ruangan.edit');
+    Route::post('ruangan_simpan', 'RuanganController@store')->name('ruangan.store');
+
+    Route::post('ruangan_update/{id}', 'RuanganController@update')->name('ruangan.update');
+
+    
+    Route::get('ruangan_detail/{id}', 'RuanganController@detail')->name('ruangan.detail');
+
     Route::get('ruangan_download_template', 'RuanganController@download_template')->name('ruangan.download_template');
     Route::post('ruangan_import', 'RuanganController@import')->name('ruangan.import');
     Route::post('ruangan/bulk/delete', 'RuanganController@bulk_delete')->name('ruangan.bulk_delete');

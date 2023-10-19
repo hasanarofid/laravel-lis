@@ -100,9 +100,7 @@ class GroupsController extends Controller
             // ->editColumn('paid',function($group){
             //     return formated_price($group['paid']);
             // })
-            // ->editColumn('due',function($group){
-            //     return view('admin.groups._due',compact('group'));
-            // })
+   
             ->editColumn('done', function ($group) {
                 return view('admin.groups._status', compact('group'));
             })
@@ -136,8 +134,9 @@ class GroupsController extends Controller
      */
     public function store(GroupRequest $request)
     {
+        // dd($request['select_ruangan']);
         try {
-            $group = Group::create($request->except('_token', 'tests', 'cultures', 'packages', 'payments', 'DataTables_Table_0_length', 'DataTables_Table_1_length', 'DataTables_Table_2_length'));
+            $group = Group::create($request->except('_token', 'tests', 'cultures', 'packages', 'payments', 'DataTables_Table_0_length', 'DataTables_Table_1_length', 'DataTables_Table_2_length','select_ruangan'));
 
 
             $group->update([
@@ -151,7 +150,8 @@ class GroupsController extends Controller
                     GroupTest::create([
                         'group_id' => $group->id,
                         'test_id' => $test['id'],
-                        'price' => $test['price']
+                        'price' => $test['price'],
+                        'ruangan_id' => isset($request['select_ruangan']) ? $request['select_ruangan'] : null,
                     ]);
                 }
             }

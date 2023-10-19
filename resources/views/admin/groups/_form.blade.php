@@ -155,6 +155,25 @@
 </div>
 <!-- /patient info-->
 
+<!-- Ruangan -->
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h5 class="card-title">
+                    {{__('Ruangan')}}
+                </h5>
+            </div>
+            <div class="card-header">
+                <select name="select_ruangan" id="select_ruangan" class="form-control"></select>
+            </div>
+            
+        </div>
+    </div>
+  
+</div>
+<!-- \Ruangan -->
+
 <!-- Tests -->
 <div class="row">
     <div class="col-lg-4">

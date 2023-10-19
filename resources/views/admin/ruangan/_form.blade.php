@@ -39,7 +39,7 @@
                                 <i class="fas fa-globe"> STATUS</i>
                             </span>
                             </div>
-                            <input type="checkbox" name="status" id="status" class="form-control" @if(isset($model)) value="{{$model->status}}" @elseif(old('status')) value="{{old('status')}}" @endif {{  isset($model->status) ? 'checked' : '' }} >
+                            <input type="checkbox" name="status" id="status" class="form-control" @if(isset($model)) value="{{$model->status}}" @elseif(old('status')) value="{{old('status')}}" @endif @if(isset($model) && $model->status == true) "selected"  @else "" @endif  >
                         </div>
                     </div>
                 </div>

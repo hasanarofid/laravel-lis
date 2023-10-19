@@ -39,6 +39,7 @@ use App\Models\Timezone;
 use App\Models\Country;
 use App\Models\ContractPrice;
 use App\Mail\PatientCode;
+use App\Models\RuanganM;
 use DataTables;
 use Mail;
 use Str;
@@ -1324,6 +1325,29 @@ class AjaxController extends Controller
         }
 
         return response()->json($users);
+    }
+
+     /**
+    * get invoice tests
+    *
+    * @access public
+    * @var  @Request $request
+    */
+    public function get_list_ruangan(Request $request)
+    {
+        if(isset($request->term))
+        {
+            $ruangan=RuanganM::where('nama_ruangan','like','%'.$request->term.'%')
+                        ->take(50)
+                        ->get();
+        }
+        else{
+            $ruangan=RuanganM::where('nama_ruangan','like','%'.$request->term.'%')
+                        ->take(50)
+                        ->get();
+        }
+
+        return response()->json($ruangan);
     }
 
     /**

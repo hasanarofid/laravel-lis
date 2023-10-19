@@ -112,6 +112,8 @@
                             <th width="50px">{{ __('Gender') }}</th>
                             <th width="50px">{{ __('Age') }}</th>
                             <th width="50px">{{ __('Phone') }}</th>
+                            <th width="50px">{{ __('Ruangan') }}</th>
+
                             <th width="200px">{{ __('Tests') }}</th>
                             <th width="100px">{{ __('Date') }}</th>
                                                         <th class="text-center" width="10px">Transfer</th>
