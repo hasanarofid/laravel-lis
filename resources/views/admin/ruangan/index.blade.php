@@ -39,13 +39,9 @@
     <div class="card-body">
           <div class="row">
         <div class="col-lg-12 table-responsive">
-          <table id="patients_table" class="table table-striped table-bordered" width="100%">
+          <table id="ruangan_table" class="table table-striped table-bordered" width="100%">
             <thead>
             <tr>
-              <th width="10px">
-                <input type="checkbox" class="check_all" name="" id="">
-              </th>
-              <th width="10px">#</th>
               <th>{{__('Kode Ruangan')}}</th>
               <th>{{__('Nama Ruangan')}}</th>
               <th>{{__('Status')}}</th>
@@ -64,6 +60,12 @@
   </div>
 
 @endsection
+
 @section('scripts')
+    <script>
+        var can_delete=@can('delete_medical_report')true @else false @endcan ;
+        var can_view=@can('view_medical_report')true @else false @endcan ;
+    </script>
+
   <script src="{{url('js/admin/ruangan.js')}}"></script>
 @endsection
