@@ -111,11 +111,16 @@
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span class="title">{{__('Contract')}} :</span> <span
+                                                    <span class="title">{{__('Ruangan')}} :</span> <span
                                                         class="data">
-                                                        @if(isset($group['contract']))
-                                                            {{ $group['contract']['title'] }}
-                                                        @endif
+                                                           @php
+                   $grouptest = App\Models\GroupTest::where('group_id', $group['id'])->first();
+            $ruangan = App\Models\RuanganM::find($grouptest->ruangan_id);
+            // dd($ruangan);
+       @endphp
+         @if(isset($ruangan))
+                                        {{ $ruangan->nama_ruangan }}
+                                    @endif
                                                     </span>
                                                 </td>
                                             </tr>

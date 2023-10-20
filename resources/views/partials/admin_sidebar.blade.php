@@ -60,7 +60,7 @@
       </li>
       @endcan
       <li class="nav-item">
-        <a href="{{route('admin.ruangan.index')}}" class="nav-link" id="groups">
+        <a href="{{route('admin.ruangan.index')}}" class="nav-link" id="ruangans">
           <i class="nav-icon fas fa-home"></i>
           <p>
             {{__('Master Ruangan')}}
