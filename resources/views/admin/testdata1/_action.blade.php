@@ -1,9 +1,9 @@
 {{-- @can('edit_patient') --}}
-    <a data-tooltip="Detail Test Data" class="btn btn-info btn-sm" href="{{route('admin.testdata.detail',$patient['PATIENT_ID_OPT'])}}">
+    <a data-tooltip="Detail Test Data" class="btn btn-info btn-sm" href="{{route('admin.testdata1.detail',$patient['PATIENT_ID_OPT'])}}">
         <i class="fa fa-info-circle" aria-hidden="true"></i>
     </a>
 
-       <a data-tooltip="Edit Test Data" class="btn btn-primary btn-sm" href="{{route('admin.testdata.edit',$patient['PATIENT_ID_OPT'])}}">
+       <a data-tooltip="Edit Test Data" class="btn btn-primary btn-sm" href="{{route('admin.testdata1.edit',$patient['PATIENT_ID_OPT'])}}">
         <i class="fa fa-edit" aria-hidden="true"></i>
     </a>
 
@@ -11,7 +11,7 @@
 {{-- @endcan --}}
 
 {{-- @can('delete_patient') --}}
-    <form method="POST" action="{{route('admin.testdata.destroy',$patient['PATIENT_ID_OPT'])}}" class="d-inline">
+    <form method="POST" action="{{route('admin.testdata1.destroy',$patient['PATIENT_ID_OPT'])}}" class="d-inline">
         <input type="hidden" name="_method" value="post">
         <button data-tooltip="Hapus Test Data" type="submit" class="btn btn-danger btn-sm delete_testdata">
             <i class="fa fa-trash"></i>

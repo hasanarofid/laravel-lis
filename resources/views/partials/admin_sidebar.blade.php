@@ -37,23 +37,43 @@
         </a>
         <ul class="nav nav-treeview">
 
-          @can('view_test_data_1')
+          @can('view_test_data_0')
           <li class="nav-item">
-            <a href="{{route('admin.testdata.index')}}" class="nav-link" id="test_data_1">
+            <a href="{{route('admin.testdata.index')}}" class="nav-link" id="test_data_0">
               <i class="far fa-circle nav-icon"></i>
-              <p>{{__('Test Data 1')}}</p>
+              <p>{{__('Test Data ')}}</p>
             </a>
           </li>
           @endcan
           
           @can('view_test_data_2')
           <li class="nav-item">
-          <a href="{{route('admin.testdata1.index')}}" class="nav-link" id="test_data_2">
+          <a href="{{route('admin.testdata.index')}}" class="nav-link" id="test_data_0">
+              <i class="far fa-circle nav-icon"></i>
+              <p>{{__('Test Data ')}}</p>
+            </a>
+          </li>
+          @endcan
+
+          @can('view_test_data_2')
+          <li class="nav-item">
+          <a href="{{route('admin.testdata1.index')}}" class="nav-link" id="test_data_1">
+              <i class="far fa-circle nav-icon"></i>
+              <p>{{__('Test Data 1')}}</p>
+            </a>
+          </li>
+          @endcan
+
+          @can('view_test_data_2')
+          <li class="nav-item">
+          <a href="{{route('admin.testdata2.index')}}" class="nav-link" id="test_data_2">
               <i class="far fa-circle nav-icon"></i>
               <p>{{__('Test Data 2')}}</p>
             </a>
           </li>
           @endcan
+
+
 
         
         </ul>

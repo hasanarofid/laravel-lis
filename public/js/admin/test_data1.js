@@ -10,7 +10,7 @@ var count = 0;
 
    $('#testdata').addClass('menu-open');
    $('#test_data_link').addClass('active');
-   $('#test_data_2').addClass('active');
+   $('#test_data_1').addClass('active');
    // $('#test_data_1').addClass('active');
    // $('#tests_prices').addClass('active');
 
@@ -51,7 +51,7 @@ var count = 0;
       "serverSide": true,
       "order": [[1, "desc"]],
       "ajax": {
-         url: url("admin/test_data"),
+         url: url("admin/test_data1"),
       },
       fixedHeader: true,
       "columns": [

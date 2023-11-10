@@ -50,6 +50,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('cekpasien', 'Testdata1Controller@cekpasien')->name('cekpasien');
     });
 
+     //test data 2
+     Route::resource('test_data2', 'Testdata2Controller');
+     Route::group(['prefix' => 'testdata2', 'as' => 'testdata2.'], function () {
+         Route::get('index', 'Testdata2Controller@index')->name('index');
+         Route::get('detail/{id}', 'Testdata2Controller@detail')->name('detail');
+         Route::get('edit/{id}', 'Testdata2Controller@edit')->name('edit');
+         Route::get('loadtabledata', 'Testdata2Controller@loadtabledata')->name('loadtabledata');
+         Route::post('update/{id}', 'Testdata2Controller@update')->name('update');
+         Route::post('senddata', 'Testdata2Controller@senddata')->name('senddata');
+         Route::post('testdata/bulk/delete/{id}', 'Testdata2Controller@bulk_delete')->name('destroy');
+         Route::get('cekpasien', 'Testdata2Controller@cekpasien')->name('cekpasien');
+     });
+
     //profile
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('edit', 'ProfileController@edit')->name('edit');
