@@ -58,10 +58,10 @@ class Testdata2Controller extends Controller
             ->join('tests as te', 'te.id', '=', 't.test_id')
             ->join('patients as p', 'p.id', '=', 'gg.patient_id')
             ->select('te.name', 'p.code', 'p.name', 't.result')
-            ->where('gg.barcode2', $request->barcode)
+            ->where('gg.barcode', $request->barcode)
             ->where('t.status', 'Pending')
             ->get();
-        dd($cekGroup);
+        // dd($cekGroup);
         // $order = OrderData::where('PATIENT_ID_OPT', $request->pasien_id)->first();
         $data = [];
         if ($cekGroup->isEmpty()) {
@@ -84,7 +84,7 @@ class Testdata2Controller extends Controller
                 ->join('tests as te', 'te.id', '=', 't.test_id')
                 ->join('patients as p', 'p.id', '=', 'gg.patient_id')
                 ->select('te.name', 'p.code', 'p.name', 't.result')
-                ->where('p.code', (int)$request->pasien_id)
+                ->where('gg.barcode', $request->barcode)
                 ->where('t.status', 'Pending')
                 ->get();
             $data['tabel'] = $tableData;
@@ -117,7 +117,7 @@ class Testdata2Controller extends Controller
             ->join('tests as te', 'te.id', '=', 't.test_id')
             ->join('patients as p', 'p.id', '=', 'gg.patient_id')
             ->select('p.code', 'p.name as patient_name', 't.created_at', DB::raw('COUNT(t.result) as result_count'))
-            ->where('p.code', (int)$request->pasien_id)
+            ->where('gg.barcode', $request->barcode)
             ->where('t.status', 'Pending')
 
             ->groupBy('p.code', 'patient_name', 't.created_at')
@@ -162,7 +162,6 @@ $timestamp = now();
     // senddata
     public function senddata(Request $request)
     {
-        $id = $request->pasien_id;
         $timestamp = now();
         foreach ($request->selectedData as $time) {
             $cek = DB::table('group_test_results as t')
@@ -171,12 +170,12 @@ $timestamp = now();
                 ->join('tests as te', 'te.id', '=', 't.test_id')
                 ->join('patients as p', 'p.id', '=', 'gg.patient_id')
                 ->select('te.name', 'p.code', 'p.name as patient_name', 't.created_at', 't.test_id')
-                ->where('p.code', (int)$request->pasien_id)
+                ->where('gg.barcode', $request->barcode)
                 ->where('t.created_at', $time)
                 ->get();
             // dd($cek);
             foreach ($cek as $order) {
-                $value = TestData2::where('PATIENT_ID_OPT', (int)$request->pasien_id)
+                $value = TestData2::where('barcode', $request->barcode)
                     ->where('RESULT_TEST_ID', $order->name)->first();
                 DB::table('group_test_results as t')
                     ->join('group_tests as g', 'g.id', '=', 't.group_test_id')
@@ -184,7 +183,7 @@ $timestamp = now();
                     ->join('tests as te', 'te.id', '=', 't.test_id')
                     ->join('patients as p', 'p.id', '=', 'gg.patient_id')
                     ->select('te.name', 'p.code', 'p.name as patient_name', 't.created_at')
-                    ->where('p.code', (int)$request->pasien_id)
+                    ->where('gg.barcode', $request->barcode)
                     ->where('t.created_at', $time)
                     ->where('t.test_id', $order->test_id)
                     ->update([

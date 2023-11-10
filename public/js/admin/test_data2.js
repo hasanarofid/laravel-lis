@@ -262,7 +262,7 @@ function transferData(id) {
                   url: url("admin/testdata2/loadtabledata"),
                   dataType: 'html',
                   data: {
-                     'pasien_id': id
+                     'barcode': id
                   },
                   success: function (data) {
                      Swal.fire({
@@ -293,7 +293,7 @@ function transferData(id) {
                                  method: 'POST',
                                  data: {
                                     selectedData: selectedData,
-                                    pasien_id: id
+                                    barcode: id
                                  },
                                  success: function (response) {
                                     Swal.fire('Success', 'Data has been transferred.', 'success');
