@@ -177,7 +177,8 @@ $timestamp = now();
             foreach ($cek as $order) {
                 $value = TestData2::where('barcode', $request->barcode)
                     ->where('RESULT_TEST_ID', $order->name)->first();
-                DB::table('group_test_results as t')
+                    // dd($value);
+            $save =     DB::table('group_test_results as t')
                     ->join('group_tests as g', 'g.id', '=', 't.group_test_id')
                     ->join('groups as gg', 'gg.id', '=', 'g.group_id')
                     ->join('tests as te', 'te.id', '=', 't.test_id')
@@ -192,7 +193,7 @@ $timestamp = now();
                         't.result' => !empty($value) ? $value->RESULT_VALUE : null,
                         't.status' => 'menunggu validasi'
                     ]);
-                // dd($data);
+                // dd($save);
             }
         }
 
