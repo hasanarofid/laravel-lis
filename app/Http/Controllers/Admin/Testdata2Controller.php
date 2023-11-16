@@ -94,15 +94,17 @@ class Testdata2Controller extends Controller
     }
 
     public function edit($id){
-        $model = TestData2::where('PATIENT_ID_OPT', $id)->first();
-        $data = TestData2::where('PATIENT_ID_OPT', $id)->get();
+        $model = TestData2::where('barcode', $id)->first();
+        // dd($model);
+        $data = TestData2::where('barcode', $id)->get();
      
         return view('admin.testdata2.edit', compact('model','data'));
     }
 
     public function detail($id){
-        $model = TestData2::where('PATIENT_ID_OPT', $id)->first();
-        $data = TestData2::where('PATIENT_ID_OPT', $id)->get();
+ 
+         $model = TestData2::where('barcode', $id)->first();
+        $data = TestData2::where('barcode', $id)->get();
      
         return view('admin.testdata2.detail', compact('model','data'));
     }
@@ -129,15 +131,14 @@ class Testdata2Controller extends Controller
 
     public function update($id,Request $request){
        
-          $data = TestData2::where('PATIENT_ID_OPT', $id)->get();
+          $data = TestData2::where('barcode', $id)->get();
+        //   dd($data);
 $timestamp = now();
     foreach($request['id'] as $key=>$value){
-        TestData2::where('ID', $value)
+        TestData2::where('barcode', $value)
                     ->update([
-                        'TIMESTAMP' => $timestamp,
                         'DATE_TIME_STAMP' => $timestamp,
-                        'RESULT_VALUE' => !empty($request['result'][$key]) ? $request['result'][$key] : null,
-                        'RESULT_DATE' => $timestamp,
+                        'RESULT_VALUE' => !empty($request['result'][$key]) ? $request['result'][$key] : null
                     ]);
     }
 
@@ -150,7 +151,7 @@ $timestamp = now();
     //bulk_delete
     public function bulk_delete($id){
         // dd($id);
-                $model = TestData2::where('PATIENT_ID_OPT', $id)->delete();
+                $model = TestData2::where('barcode', $id)->delete();
                 session()->flash('success',__('Test delete successfully'));
 
         return redirect()->route('admin.testdata2.index');

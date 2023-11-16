@@ -25,8 +25,14 @@ use DataTables;
 use Illuminate\Support\Facades\Log;
 use PDF;
 use App\Models\TestData;
+use App\Models\TestData1;
+use App\Models\TestData2;
+
 use Illuminate\Support\Facades\DB;
 use App\Events\TestDataOtomatis;
+use App\Events\TestDataOtomatis1;
+use App\Events\TestDataOtomatisbyBarcode;
+
 
 class MedicalReportsController extends Controller
 {
@@ -65,6 +71,20 @@ class MedicalReportsController extends Controller
         // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
         event(new TestDataOtomatis($testdata));
     }
+
+    public function cekTestDataOtomatis2(){
+        $testdata = Testdata1::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+            ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME')->get();
+        // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
+        event(new TestDataOtomatis1($testdata));
+    }
+
+    public function cekTestDataOtomatis3(){
+        $testdata =TestData2::select('barcode', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+        ->groupBy('barcode')->get();
+        // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
+        event(new TestDataOtomatisbyBarcode($testdata));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -77,6 +97,10 @@ class MedicalReportsController extends Controller
         // dd($transfer_otomatis_settings['status']);
         if($transfer_otomatis_settings['status'] == true){
             $this->cekTestDataOtomatis();
+            $this->cekTestDataOtomatis2();
+            $this->cekTestDataOtomatis3();
+
+
         }
 
         if ($request->ajax()) {
