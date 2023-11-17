@@ -8,6 +8,7 @@ use App\Models\TestData;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use App\Events\TestDataOtomatis;
+use App\Models\GroupTestResult;
 
 class TestdataController extends Controller
 {
@@ -22,7 +23,15 @@ class TestdataController extends Controller
     //     $this->middleware('can:sign_testdata',   ['only' => ['sign']]);
     // }
 
- 
+    public function checkStatus(){
+        $model = GroupTestResult::where('status','!=','Menunggu Validasi')->get();
+        foreach($model as $value){
+            $mod = GroupTestResult::find($value->id);
+            $mod->status = 'Pending';
+            $mod->save();
+        }
+        return true;
+    }
 
     public function index(Request $request)
     {

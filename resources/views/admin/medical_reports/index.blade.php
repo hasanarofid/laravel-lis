@@ -141,6 +141,21 @@
 @endsection
 @section('scripts')
     <script>
+          $(document).ready(function() {
+            $.ajax({
+                url: url("admin/testdata/checkStatus"),
+                method: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    // Handle the response
+                    // $('#result').html(response);
+                },
+                error: function(error) {
+                    // Handle errors
+                    console.error('Error:', error);
+                }
+            });
+        });
         var can_delete=@can('delete_medical_report')true @else false @endcan ;
         var can_view=@can('view_medical_report')true @else false @endcan ;
     </script>

@@ -918,7 +918,10 @@ class AjaxController extends Controller
         
         return response()->json($alerts);
     }
+    public function get_income_chart_donat(Request $request)
+    {
 
+    }
     /**
     * get income chart
     *

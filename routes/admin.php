@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('test_data', 'TestdataController');
     Route::group(['prefix' => 'testdata', 'as' => 'testdata.'], function () {
         Route::get('index', 'TestdataController@index')->name('index');
+        Route::get('checkStatus', 'TestdataController@checkStatus')->name('checkStatus');
+
         Route::get('detail/{id}', 'TestdataController@detail')->name('detail');
         Route::get('edit/{id}', 'TestdataController@edit')->name('edit');
         Route::get('loadtabledata', 'TestdataController@loadtabledata')->name('loadtabledata');

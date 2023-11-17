@@ -36,6 +36,8 @@ use App\Events\TestDataOtomatisbyBarcode;
 
 class MedicalReportsController extends Controller
 {
+  
+
     /**
      * assign roles
      */
@@ -48,6 +50,7 @@ class MedicalReportsController extends Controller
         $this->middleware('can:sign_medical_report',   ['only' => ['sign']]);
     }
 
+ 
     // ubah status 
     public function ubahStatus($id,Request $request){
         // dd($request->status);
@@ -90,6 +93,8 @@ class MedicalReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index(Request $request)
     {
 
