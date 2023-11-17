@@ -7,6 +7,8 @@ Route::group(['prefix'=>'ajax','as'=>'ajax.','middleware'=>'Ajax'],function(){
 
     //get patient
     Route::get('get_patient','AjaxController@get_patient')->name('get_patient'); 
+    Route::get('get_income_chart_donat','AjaxController@get_income_chart_donat')->name('get_income_chart_donat'); 
+    
 
     //create patient
     Route::post('create_patient','AjaxController@create_patient')->name('create_patient')->middleware('Admin');

@@ -15,6 +15,68 @@
   .ui-datepicker-current{
     display: none!important;
   }
+  .bg-test{
+    background-color:  #00539C;
+    color: white;
+  }
+
+  .bg-cul{
+    background-color:  #2F3C7E;
+    color: white;
+  }
+
+  .bg-3{
+    background-color:  #4831D4;
+    color: white;
+  }
+  
+  .bg-4{
+    background-color:  #00008B;
+    color: white;
+  }
+
+  .bg-5{
+    background-color:  #234E70;
+    color: white;
+  }
+
+  .bg-6{
+    background-color:  #1E2761;
+    color: white;
+  }
+
+  .bg-7{
+    background-color:  #088F8F;
+    color: white;
+  }
+
+  .bg-8{
+    background-color:  #097969;
+    color: white;
+  }
+
+
+  .bg-9{
+    background-color:  #5F9EA0;
+    color: white;
+  }
+
+  .bg-10{
+    background-color:  #50C878;
+    color: white;
+  }
+
+  .bg-11{
+    background-color:  #4F7942;
+    color: white;
+  }
+
+  .bg-12{
+    background-color:  #355E3B;
+    color: white;
+  }
+
+
   </style>
 <div class="content-header">
     <div class="container-fluid">
@@ -62,13 +124,13 @@
                 
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-test">
                     <div class="card-body">
                       <div class="row">
                       <div class="col-3 col-sm-4 col-xs-4">
-                        <span class="icon">
+                        <span class="icon" >
                           <span class="text-center">
-                            <i class="fa fa-flask"></i>
+                            <i class="fa fa-flask" style="color: white"></i>
                           </span>
                         </span>
                       </div>
@@ -85,12 +147,12 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-cul">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-vial"></i>
+                            <i class="fa fa-vial" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -106,12 +168,12 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-3" >
                         <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-capsules"></i>
+                            <i class="fa fa-capsules" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -127,12 +189,12 @@
 
                 </div>
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-4">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-user-injured"></i>
+                            <i class="fa fa-user-injured" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -147,12 +209,12 @@
                   </div>
                 </div>
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-5">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-file-contract"></i>
+                            <i class="fa fa-file-contract" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -168,12 +230,12 @@
                 </div>
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-6">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-home"></i>
+                            <i class="fa fa-home" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -196,12 +258,12 @@
               @can('view_tests_statistics')
                 <!-- tests statistics -->
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-info-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-7">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-list"></i>
+                            <i class="fa fa-list" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -217,12 +279,12 @@
                 </div>
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-danger-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-8">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-pause-circle"></i>
+                            <i class="fa fa-pause-circle" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -238,12 +300,12 @@
                 </div>
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-success-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-9">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-check-double"></i>
+                            <i class="fa fa-check-double" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -259,12 +321,12 @@
                 </div>
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-info-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-10">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-list"></i>
+                            <i class="fa fa-list" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -280,12 +342,12 @@
                 </div>
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-danger-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-11">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-pause-circle"></i>
+                            <i class="fa fa-pause-circle" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -301,12 +363,12 @@
                 </div>
 
                 <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-success-box">
-                  <div class="card custom-primary-box">
+                  <div class="card custom-primary-box bg-12">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-check-double"></i>
+                            <i class="fa fa-check-double" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
@@ -333,7 +395,7 @@
 
       @can('view_income_statistics')
       <!-- Income chart -->
-      <div class="col-lg-7">
+      <div class="col-lg-12">
         <div class="card card-primary">
           <div class="card-header">
             <h5 class="card-title">
@@ -372,25 +434,107 @@
         </div>
       </div>
 
-      <div class="col-lg-5">
+      
+     <!-- \Income chart -->
+     @endcan
+    </div>
+
+
+    @canAny(['view_best_income_packages','view_best_income_tests'])
+    <!-- Best income chart -->
+    <div class="row">
+
+      @can('view_best_income_packages')
+      <!-- Best income packages -->
+      <div class="col-lg-6">
         <div class="card card-primary">
-          
           <div class="card-header">
-            <div class="card-title">
-              Card Donat
+              <h5 class="card-title">
+                {{__('Best income packages')}}
+              </h5>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+          </div>
+          <div class="card-header">
+            <div class="row">
+              <div class="col-lg-7">
+                 <input type="text" class="form-control datepickerrange" id="filter_best_package_date">
+               </div>
+               <div class="col-lg-5">
+                   <select id="filter_best_package_branch" class="form-control">
+                     <option value="" selected>{{__('All branches')}}</option>
+                     @foreach($all_branches as $branch)
+                       <option value="{{$branch['id']}}">{{$branch['name']}}</option>
+                     @endforeach
+                   </select>
+               </div>
             </div>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-lg-12" id="income_chart_donat">
+              <div class="col-lg-12" id="best_packages">
               </div>
             </div>
           </div>
         </div>
       </div>
-     <!-- \Income chart -->
-     @endcan
+      <!-- \Best income packages -->
+      @endcan
+      
+      @can('view_best_income_tests')
+      <!-- Best income tests -->
+      <div class="col-lg-6">
+        <div class="card card-primary">
+          <div class="card-header">
+              <h5 class="card-title">
+                {{__('Best income tests')}}
+              </h5>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+          </div>
+          <div class="card-header">
+            <div class="row">
+              <div class="col-lg-7">
+                  <input type="text" class="form-control datepickerrange" id="filter_best_test_date">
+              </div>
+              <div class="col-lg-5">
+                  <select id="filter_best_test_branch" class="form-control">
+                    <option value="" selected>{{__('All branches')}}</option>
+                    @foreach($all_branches as $branch)
+                      <option value="{{$branch['id']}}">{{$branch['name']}}</option>
+                    @endforeach
+                  </select>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12" id="best_tests">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Best income tests -->
+      @endcan
+
+
     </div>
+    <!-- \Best income chart -->
+    @endcan
+
 
     
 

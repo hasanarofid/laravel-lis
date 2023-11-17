@@ -920,7 +920,7 @@ class AjaxController extends Controller
     }
     public function get_income_chart_donat(Request $request)
     {
-
+        dd($request);
     }
     /**
     * get income chart
@@ -989,11 +989,12 @@ class AjaxController extends Controller
     */
     public function get_best_income_packages(Request $request)
     {
+       
         //format date
         $date=explode('-',$request['date']);
         $from=date('Y-m-d',strtotime($date[0]));
         $to=date('Y-m-d 23:59:59',strtotime($date[1]));
-
+        // dd($from);
         $packages=GroupPackage::selectRaw('package_id ,packages.name, sum(group_packages.price) as income')
                         ->groupBy('package_id')
                         ->leftJoin('packages','group_packages.package_id','packages.id')
