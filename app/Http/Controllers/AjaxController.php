@@ -934,16 +934,42 @@ class AjaxController extends Controller
         $expenses_arr=[];
         $purchases_arr=[];
         $profit_arr=[];
+        $request['branch_id'] = 1;
+        // for($i=1;$i<32;$i++)
+        // {
+        //     $payment_amount=GroupPayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+        //     $payments_arr[]=$payment_amount;
+        //     $expense_amount=Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+        //     // (empty($request['branch_id']))?
+        //     // Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):Expense::where('branch_id',$request['branch_id'])->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+        //     $expenses_arr[]=$expense_amount;
+        //     $purchase_amount= PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+        //     // (empty($request['branch_id']))?PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):PurchasePayment::whereHas('purchase',function($q)use($request){$q->where('branch_id',$request['branch_id']);})->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+        //     $purchases_arr[]=$purchase_amount;
+        //     $profit_arr[]=$payment_amount-$expense_amount-$purchase_amount;
+        // }
+        // dd($payments_arr);
 
-        for($i=1;$i<32;$i++)
-        {
-            $payment_amount=(empty($request['branch_id']))?GroupPayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):GroupPayment::whereHas('group',function($q)use($request){$q->where('branch__idid',$request['branch_id']);})->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-            $payments_arr[]=$payment_amount;
-            $expense_amount=(empty($request['branch_id']))?Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):Expense::where('branch_id',$request['branch_id'])->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-            $expenses_arr[]=$expense_amount;
-            $purchase_amount=(empty($request['branch_id']))?PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):PurchasePayment::whereHas('purchase',function($q)use($request){$q->where('branch_id',$request['branch_id']);})->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-            $purchases_arr[]=$purchase_amount;
-            $profit_arr[]=$payment_amount-$expense_amount-$purchase_amount;
+        $amplitude = 20;   // Adjust the amplitude to control the height of the wave
+        $frequency = 2;    // Adjust the frequency to control the number of waves
+        $phaseShift = 0;   // Adjust the phase shift to control the horizontal shift
+        $verticalShift = 0; // Adjust the vertical shift to control the baseline
+        
+        for ($i = 1; $i < 32; $i++) {
+            // Simulated payment amount data
+            $payment_amount = 34;
+            $payments_arr[] = $payment_amount -1;
+        
+            // Simulated expense amount data
+            $expense_amount = 100;
+            $expenses_arr[] = $expense_amount * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
+        
+            // Simulated purchase amount data
+            $purchase_amount = 200;
+            $purchases_arr[] = $purchase_amount * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
+        
+            // Calculate profit with a more complex sine wave pattern
+            $profit_arr[] = $payment_amount - $expense_amount - $purchase_amount + $amplitude * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
         }
 
         return response()->json([
@@ -1003,18 +1029,20 @@ class AjaxController extends Controller
 
         ($from==$to)?$packages->whereDate('group_packages.created_at',$from):$packages->whereBetween('group_packages.created_at',[$from,$to]);
 
-        if(!empty($request['branch_id']))
-        {
-            $packages->whereHas('group',function($query)use($request){
-                return $query->where('branch_id',$request['branch_id']);
-            });
-        }
+        // if(!empty($request['branch_id']))
+        // {
+        //     $packages->whereHas('group',function($query)use($request){
+        //         return $query->where('branch_id',$request['branch_id']);
+        //     });
+        // }
 
         $packages=$packages->take(5)->get();
 
         $labels=[];
         $data=[];
-        $background_color=['#00cfe8','#ea5455','#7367f0','#28c76f','#ff9f43'];
+        $background_color = ['#3498db', '#e74c3c', '#9b59b6', '#2ecc71', '#f39c12'];
+
+        // $background_color=['#00cfe8','#ea5455','#7367f0','#28c76f','#ff9f43'];
 
         foreach($packages as $package)
         {
@@ -1059,18 +1087,23 @@ class AjaxController extends Controller
 
         ($from==$to)?$tests->whereDate('group_tests.created_at',$from):$tests->whereBetween('group_tests.created_at',[$from,$to]);
 
-        if(!empty($request['branch_id']))
-        {
-            $tests->whereHas('group',function($query)use($request){
-                return $query->where('branch_id',$request['branch_id']);
-            });
-        }
+        // if(!empty($request['branch_id']))
+        // {
+        //     $tests->whereHas('group',function($query)use($request){
+        //         return $query->where('branch_id',$request['branch_id']);
+        //     });
+        // }
 
         $tests=$tests->take(5)->get();
 
         $labels=[];
         $data=[];
-        $background_color=['#00cfe8','#ea5455','#7367f0','#28c76f','#ff9f43'];
+        // $background_color = ['#4CAF50', '#FFC107', '#FF5722', '#9C27B0', '#E91E63'];
+        $background_color = ['#4CAF50', '#FFD700', '#FF5722', '#9C27B0', '#E91E63'];
+
+
+
+        // $background_color=['#00cfe8','#ea5455','#7367f0','#28c76f','#ff9f43'];
 
         foreach($tests as $test)
         {
@@ -1116,12 +1149,12 @@ class AjaxController extends Controller
 
         ($from==$to)?$cultures->whereDate('group_cultures.created_at',$from):$cultures->whereBetween('group_cultures.created_at',[$from,$to]);
 
-        if(!empty($request['branch_id']))
-        {
-            $cultures->whereHas('group',function($query)use($request){
-                return $query->where('branch_id',$request['branch_id']);
-            });
-        }
+        // if(!empty($request['branch_id']))
+        // {
+        //     $cultures->whereHas('group',function($query)use($request){
+        //         return $query->where('branch_id',$request['branch_id']);
+        //     });
+        // }
 
         $cultures=$cultures->take(5)->get();
 

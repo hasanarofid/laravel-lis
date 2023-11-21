@@ -78,6 +78,69 @@
 
 
   </style>
+
+<style>
+  /* Customize the chart container */
+  #income_chart_statistics {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Adjust the legend style */
+  .chart-legend li span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+
+  /* Customize the legend label color */
+  .chart-legend li {
+    color: #333;
+  }
+</style>
+
+<style>
+  /* Custom style for the doughnut chart container */
+  #best_packages_chart_container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #best_tests_chart_container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Customize the legend style */
+  .chart-legend li span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+
+  /* Customize the legend label color */
+  .chart-legend li {
+    color: #333;
+  }
+</style>
+
+
 <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -123,73 +186,30 @@
                 <!-- Card 1 -->
                 
 
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box bg-test">
-                    <div class="card-body">
-                      <div class="row">
-                      <div class="col-3 col-sm-4 col-xs-4">
-                        <span class="icon" >
-                          <span class="text-center">
-                            <i class="fa fa-flask" style="color: white"></i>
-                          </span>
-                        </span>
-                      </div>
-                      <div class="col-7 col-sm-8 col-xs-8">
-                        <h4 class="m-0" id="tests_count">
-                        </h4>
-                        <span>
-                          {{__('Tests')}}
-                        </span>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box bg-cul">
+                <div class="col-lg-4 col-sm-12 col-xs-12 mt-6 mb-6 custom-primary-box">
+                  <div class="card custom-primary-box bg-3" style="border-radius:1.75rem !important">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
                           <span class="text-center icon">
-                            <i class="fa fa-vial" style="color: white"></i>
+                            <i class="fa fa-user-injured" style="color: white"></i>
                           </span>
                         </div>
                         <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="cultures_count">
-                          </h4>
-                          <span>
-                            {{__('Cultures')}}
-                          </span>
-                        </div>
-                      </div>  
-                    </div>  
-                  </div>  
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box bg-3" >
-                        <div class="card-body">
-                      <div class="row">
-                        <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
-                            <i class="fa fa-capsules" style="color: white"></i>
-                          </span>
-                        </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="antibiotics_count">
-                          </h4>
-                          <span>
-                            {{__('Antibiotics')}}
-                          </span>
+                          <h4 class="m-0" id="tests_count"> </h4>
+                        <span >  {{__('Tests')}}</span>
                         </div>
                       </div>
                     </div>
                   </div>
+                  
+                  
 
+            
                 </div>
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box bg-4">
+             
+                <div class="col-lg-4 col-sm-12 col-xs-12 mt-6 mb-6 custom-primary-box">
+                  <div class="card custom-primary-box bg-4" style="border-radius:1.75rem !important">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
@@ -207,66 +227,22 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box bg-5">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
-                            <i class="fa fa-file-contract" style="color: white"></i>
-                          </span>
-                        </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="contracts_count">
-                          </h4>
-                          <span>
-                            {{__('Contracts')}}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </div> 
 
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-primary-box">
-                  <div class="card custom-primary-box bg-6">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
-                            <i class="fa fa-home" style="color: white"></i>
-                          </span>
-                        </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="visits_count">
-                          </h4>
-                          <span>
-                            {{__('Home visits')}}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="col-lg-4 col-sm-12 col-xs-12 mt-12 mb-12 custom-info-box " >
 
-                </div>
-                <!-- ./col -->
-                <!-- \General statistics -->
-              @endcan
+                  <!-- Card 3 -->
+                  <div class="card custom-primary-box bg-7 flex-grow-1" style="border-radius:1.75rem !important;height:190px">
              
 
-              @can('view_tests_statistics')
-                <!-- tests statistics -->
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-info-box">
-                  <div class="card custom-primary-box bg-7">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
+                          <span class="text-center icon" style="margin-top:50px">
                             <i class="fa fa-list" style="color: white"></i>
                           </span>
                         </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
+                        <div class="col-7 col-sm-8 col-xs-8" style="margin-top:50px">
                           <h4 class="m-0" id="group_tests_count">
                           </h4>
                           <span>
@@ -278,12 +254,12 @@
                   </div>
                 </div>
 
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-danger-box">
-                  <div class="card custom-primary-box bg-8">
+                <div class="col-lg-4 col-sm-12 col-xs-12 mt-6 mb-6 custom-danger-box">
+                  <div class="card custom-primary-box bg-8" style="border-radius:1.75rem !important;margin-top:-100px" >
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
+                          <span class="text-center icon ">
                             <i class="fa fa-pause-circle" style="color: white"></i>
                           </span>
                         </div>
@@ -299,8 +275,8 @@
                   </div>
                 </div>
 
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-success-box">
-                  <div class="card custom-primary-box bg-9">
+                <div class="col-lg-4 col-sm-12 col-xs-12 mt-6 mb-6 custom-success-box">
+                  <div class="card custom-primary-box bg-9" style="border-radius:1.75rem !important;margin-top:-100px"> 
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3 col-sm-4 col-xs-4">
@@ -320,71 +296,12 @@
                   </div>
                 </div>
 
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-info-box">
-                  <div class="card custom-primary-box bg-10">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
-                            <i class="fa fa-list" style="color: white"></i>
-                          </span>
-                        </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="group_cultures_count">
-                          </h4>
-                          <span>
-                            {{__('Cultures')}}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+           
+                <!-- ./col -->
+                <!-- \General statistics -->
+              @endcan
+             
 
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-danger-box">
-                  <div class="card custom-primary-box bg-11">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
-                            <i class="fa fa-pause-circle" style="color: white"></i>
-                          </span>
-                        </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="pending_cultures_count">
-                          </h4>
-                          <span>
-                            {{__('Pending cultures')}}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-2 col-sm-12 col-xs-12 mt-4 mb-4 custom-success-box">
-                  <div class="card custom-primary-box bg-12">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3 col-sm-4 col-xs-4">
-                          <span class="text-center icon">
-                            <i class="fa fa-check-double" style="color: white"></i>
-                          </span>
-                        </div>
-                        <div class="col-7 col-sm-8 col-xs-8">
-                          <h4 class="m-0" id="done_cultures_count">
-                          </h4>
-                          <span>
-                            {{__('Completed cultures')}}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- \tests statistics -->
-              @endcan 
             </div>
           </div>
         </div>
@@ -396,6 +313,10 @@
       @can('view_income_statistics')
       <!-- Income chart -->
       <div class="col-lg-12">
+    
+
+        {{-- lama --}}
+
         <div class="card card-primary">
           <div class="card-header">
             <h5 class="card-title">
@@ -693,7 +614,17 @@
 @endsection
 
 @section('scripts')
+<script>
+  
+</script>
   <!-- Switch -->
+
+  <script src="{{url('dompet/vendor/apexchart/apexchart.js') }}"></script>
+	<script src="{{url('dompet/nouislider/nouislider.min.js') }}"></script>
+	<script src="{{url('dompet/wnumb/wNumb.js') }}"></script>
+	
+	<!-- Dashboard 1 -->
+	<script src="{{url('dompet/js/dashboard/dashboard-1.js') }}"></script>
   <script src="{{url('plugins/swtich-netliva/js/netliva_switch.js')}}"></script>
   <script src="{{url('js/admin/dashboard.js')}}"></script>
 @endsection

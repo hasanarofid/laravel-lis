@@ -300,48 +300,54 @@ function income_chart_statistics()
           height = '120px';
         }
         $('#income_chart').append(`
-          <canvas id="income_chart_statistics"  height="`+height+`" width="80vw"></canvas>
-        `);
+        <div id="income_chart_statistics_container">
+          <canvas id="income_chart_statistics" height="${height}" width="80vw"></canvas>
+        </div>
+      `);
+      
         
-        var ctx = document.getElementById('income_chart_statistics');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: response.data
+      var ctx = document.getElementById('income_chart_statistics');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: response.data,
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: response.font_color,
+              fontSize: 16,
             },
-            options: {
-                responsive:true,
-                legend: {
-                    labels: {
-                        fontColor: response.font_color,
-                        fontSize: 16
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                    yAxes: [{
-                      ticks: {
-                          fontColor: response.font_color
-                      }
-                    }],
-                    xAxes: [{
-                      ticks: {
-                          fontColor: response.font_color
-                      }
-                    }]
-                }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
             },
-            plugins: [{
-              beforeInit: function(chart, options) {
-                chart.legend.afterFit = function() {
-                  this.height = this.height + 30;
-                };
-              }
-            }]
-        });
+            yAxes: [{
+              ticks: {
+                fontColor: response.font_color,
+              },
+            }],
+            xAxes: [{
+              ticks: {
+                fontColor: response.font_color,
+              },
+            }],
+          },
+        },
+        plugins: [{
+          beforeInit: function (chart, options) {
+            chart.legend.afterFit = function () {
+              this.height = this.height + 30;
+            };
+          },
+        }],
+      });
+      
 
     },
     complete:function(){
@@ -390,26 +396,44 @@ function best_packages()
     success:function(response){
       $('#best_packages_chart').remove();
       $('#best_packages').append(`
+      <div id="best_packages_chart_container">
         <canvas id="best_packages_chart" width="80" height="80"></canvas>
+        </div>
       `);
       var ctx = document.getElementById('best_packages_chart');
       var myChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: response.data,
-          options:{
-            legend: {
-              labels: {
-                  fontColor: response.font_color,
-              }
+        type: 'doughnut',
+        data: response.data,
+        options: {
+          cutout: '80%', // Adjust the cutout percentage to control the size of the center hole
+          responsive: true,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: response.font_color,
             },
           },
-          plugins: [{
-            beforeInit: function(chart, options) {
-              chart.legend.afterFit = function() {
-                this.height = this.height + 30;
-              };
-            }
-          }]
+          plugins: {
+            datalabels: {
+              color: '#fff', // Set the label color to white
+              font: {
+                weight: 'bold',
+                size: 14,
+              },
+              formatter: function (value, context) {
+                return context.chart.data.labels[context.dataIndex] + ': ' + value; // Display labels and values in the tooltip
+              },
+            },
+          },
+        },
+        plugins: [{
+          beforeInit: function (chart, options) {
+            chart.legend.afterFit = function () {
+              this.height = this.height + 30;
+            };
+          },
+        }],
       });
     }
   });
@@ -427,27 +451,45 @@ function best_tests()
     success:function(response){
       $('#best_tests_chart').remove();
       $('#best_tests').append(`
-        <canvas id="best_tests_chart" width="80" height="80"></canvas>
+      <div id="best_tests_chart_container">
+        <canvas id="best_tests_chart" width="40" height="40"></canvas>
+        </div>
       `);
 
       var ctx = document.getElementById('best_tests_chart');
       var myChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: response.data,
-          options:{
-            legend: {
-              labels: {
-                  fontColor: response.font_color,
-              }
+        type: 'doughnut',
+        data: response.data,
+        options: {
+          cutout: '80%', // Adjust the cutout percentage to control the size of the center hole
+          responsive: true,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: response.font_color,
             },
           },
-          plugins: [{
-            beforeInit: function(chart, options) {
-              chart.legend.afterFit = function() {
-                this.height = this.height + 30;
-              };
-            }
-          }]
+          plugins: {
+            datalabels: {
+              color: '#fff', // Set the label color to white
+              font: {
+                weight: 'bold',
+                size: 14,
+              },
+              formatter: function (value, context) {
+                return context.chart.data.labels[context.dataIndex] + ': ' + value; // Display labels and values in the tooltip
+              },
+            },
+          },
+        },
+        plugins: [{
+          beforeInit: function (chart, options) {
+            chart.legend.afterFit = function () {
+              this.height = this.height + 30;
+            };
+          },
+        }],
       });
     }
   });
