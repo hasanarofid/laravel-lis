@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\TestDataOtomatis1;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Models\TestData;
+use App\Models\TestData1;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
@@ -60,7 +60,7 @@ $currentDateTimeString = $currentDateTime->toDateTimeString();
 
             // dd($cek);
             foreach ($cek as $order) {
-                $value = Testdata::where('PATIENT_ID_OPT', (int)$id)
+                $value = TestData1::where('PATIENT_ID_OPT', (int)$id)
                     ->where('RESULT_TEST_ID', $order->name)->first();
                    DB::enableQueryLog();    
              $group =    DB::table('group_test_results as t')
