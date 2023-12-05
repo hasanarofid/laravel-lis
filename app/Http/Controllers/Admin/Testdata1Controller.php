@@ -131,7 +131,7 @@ class Testdata1Controller extends Controller
           $data = TestData1::where('PATIENT_ID_OPT', $id)->get();
 $timestamp = now();
     foreach($request['id'] as $key=>$value){
-              Testdata::where('ID', $value)
+        TestData1::where('ID', $value)
                     ->update([
                         'TIMESTAMP' => $timestamp,
                         'DATE_TIME_STAMP' => $timestamp,

@@ -8,7 +8,6 @@ use App\Models\GroupTestResult;
 use App\Models\Test;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Models\TestData;
 use App\Models\TestData1;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -70,7 +69,7 @@ $currentDateTimeString = $currentDateTime->toDateTimeString();
 
             // dd($cek);
             foreach ($cek as $order) {
-                $value = TestData1::where('PATIENT_ID_OPT', $id)
+                $value = TestData1::where('PATIENT_ID_OPT', (int)$id)
                     ->where('RESULT_TEST_ID', $order->name)->first();
                     // dd($value->RESULT_UNIT);
                 $cekGrouptest = GroupTestResult::find($order->id);
