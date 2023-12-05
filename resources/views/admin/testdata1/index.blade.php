@@ -40,6 +40,7 @@
                             <th width="10px">DEVICE ID</th>
                             <th width="10px">PATIENT ID</th>
                             <th width="10px">PATIENT NAME</th>
+                            <th width="10px">TIMESTAMP</th>
                             <th width="100px">JUMLAH RESULT TEST ID</th>
                             <th width="50px">{{ __('Action') }}</th>
                         </tr>

@@ -57,6 +57,7 @@ var count = 0;
       "columns": [
          { data: 'barcode', name: 'barcode' },
  
+         { data: 'TIMESTAMP', name: 'TIMESTAMP' },
 
          { data: 'RESULT_TEST_ID', name: 'RESULT_TEST_ID' },
          { data: "action", searchable: false, orderable: false, sortable: false }//action

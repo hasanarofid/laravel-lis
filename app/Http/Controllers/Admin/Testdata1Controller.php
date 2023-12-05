@@ -31,7 +31,7 @@ class Testdata1Controller extends Controller
         $device = $request->device;
 
     if ($request->ajax()) {
-          $model = TestData1::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+          $model = TestData1::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME',DB::raw('MAX(DATE_TIME_STAMP) as TIMESTAMP'), DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
             ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME');
 
   

@@ -60,6 +60,8 @@ var count = 0;
 
 
          { data: 'PATIENT_NAME', name: 'PATIENT_NAME' },
+         { data: 'TIMESTAMP', name: 'TIMESTAMP' },
+
          { data: 'RESULT_TEST_ID', name: 'RESULT_TEST_ID' },
          { data: "action", searchable: false, orderable: false, sortable: false }//action
       ],

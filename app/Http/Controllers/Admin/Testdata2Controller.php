@@ -31,7 +31,7 @@ class Testdata2Controller extends Controller
         $device = $request->device;
 
     if ($request->ajax()) {
-          $model = TestData2::select('barcode', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+          $model = TestData2::select('barcode', DB::raw('MAX(DATE_TIME_STAMP) as TIMESTAMP'),DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
             ->groupBy('barcode');
 
   

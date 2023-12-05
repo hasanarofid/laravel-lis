@@ -69,8 +69,9 @@ class MedicalReportsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function cekTestDataOtomatis(){
-        $testdata = Testdata::select('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
-            ->groupBy('DEVICE_ID1','PATIENT_ID_OPT', 'PATIENT_NAME')->get();
+        $testdata = Testdata::select('PATIENT_ID_OPT', 'PATIENT_NAME', DB::raw('count(RESULT_TEST_ID) as RESULT_TEST_ID'))
+            ->groupBy('PATIENT_ID_OPT', 'PATIENT_NAME')->get();
+            // dd($testdata);
         // $testdata = Testdata::create([...]); // Anda dapat menyimpan data baru ke dalam Testdata
         event(new TestDataOtomatis($testdata));
     }

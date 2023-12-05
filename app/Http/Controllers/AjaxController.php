@@ -935,42 +935,42 @@ class AjaxController extends Controller
         $purchases_arr=[];
         $profit_arr=[];
         $request['branch_id'] = 1;
-        // for($i=1;$i<32;$i++)
-        // {
-        //     $payment_amount=GroupPayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-        //     $payments_arr[]=$payment_amount;
-        //     $expense_amount=Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-        //     // (empty($request['branch_id']))?
-        //     // Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):Expense::where('branch_id',$request['branch_id'])->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-        //     $expenses_arr[]=$expense_amount;
-        //     $purchase_amount= PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-        //     // (empty($request['branch_id']))?PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):PurchasePayment::whereHas('purchase',function($q)use($request){$q->where('branch_id',$request['branch_id']);})->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
-        //     $purchases_arr[]=$purchase_amount;
-        //     $profit_arr[]=$payment_amount-$expense_amount-$purchase_amount;
-        // }
+        for($i=1;$i<32;$i++)
+        {
+            $payment_amount=GroupPayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+            $payments_arr[]=$payment_amount;
+            $expense_amount=Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+            // (empty($request['branch_id']))?
+            // Expense::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):Expense::where('branch_id',$request['branch_id'])->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+            $expenses_arr[]=$expense_amount;
+            $purchase_amount= PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+            // (empty($request['branch_id']))?PurchasePayment::whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount'):PurchasePayment::whereHas('purchase',function($q)use($request){$q->where('branch_id',$request['branch_id']);})->whereDate('date',date('Y-m-d',strtotime($year.'-'.$month.'-'.$i)))->sum('amount');
+            $purchases_arr[]=$purchase_amount;
+            $profit_arr[]=$payment_amount-$expense_amount-$purchase_amount;
+        }
         // dd($payments_arr);
 
-        $amplitude = 20;   // Adjust the amplitude to control the height of the wave
-        $frequency = 2;    // Adjust the frequency to control the number of waves
-        $phaseShift = 0;   // Adjust the phase shift to control the horizontal shift
-        $verticalShift = 0; // Adjust the vertical shift to control the baseline
+        // $amplitude = 20;   // Adjust the amplitude to control the height of the wave
+        // $frequency = 2;    // Adjust the frequency to control the number of waves
+        // $phaseShift = 0;   // Adjust the phase shift to control the horizontal shift
+        // $verticalShift = 0; // Adjust the vertical shift to control the baseline
         
-        for ($i = 1; $i < 32; $i++) {
-            // Simulated payment amount data
-            $payment_amount = 34;
-            $payments_arr[] = $payment_amount -1;
+        // for ($i = 1; $i < 32; $i++) {
+        //     // Simulated payment amount data
+        //     $payment_amount = 34;
+        //     $payments_arr[] = $payment_amount -1;
         
-            // Simulated expense amount data
-            $expense_amount = 100;
-            $expenses_arr[] = $expense_amount * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
+        //     // Simulated expense amount data
+        //     $expense_amount = 100;
+        //     $expenses_arr[] = $expense_amount * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
         
-            // Simulated purchase amount data
-            $purchase_amount = 200;
-            $purchases_arr[] = $purchase_amount * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
+        //     // Simulated purchase amount data
+        //     $purchase_amount = 200;
+        //     $purchases_arr[] = $purchase_amount * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
         
-            // Calculate profit with a more complex sine wave pattern
-            $profit_arr[] = $payment_amount - $expense_amount - $purchase_amount + $amplitude * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
-        }
+        //     // Calculate profit with a more complex sine wave pattern
+        //     $profit_arr[] = $payment_amount - $expense_amount - $purchase_amount + $amplitude * sin($frequency * (2 * pi() * $i / 32 - $phaseShift)) + $verticalShift;
+        // }
 
         return response()->json([
             'data'=>[
