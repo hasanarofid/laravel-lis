@@ -9,7 +9,6 @@
   {{-- <div class="loader">
     
   </div> --}}
-
   <div class="wrapper">
 
     <!-- Navbar -->
@@ -27,7 +26,7 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid custom-radius">
           @include('partials.validation_errors')
           @yield('content')
           <input type="hidden" id="system_currency" value="{{cache('currency')}}">

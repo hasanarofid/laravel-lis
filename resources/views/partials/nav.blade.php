@@ -4,6 +4,7 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
+
     {{-- <li class="nav-item dropdown text-uppercase">
       <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button" id="dropdownMenuButton"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,24 +40,23 @@
     @endcan --}}
 
   </ul>
+
   <!-- \Left navbar links -->
-
+  {{-- <a class="navbar-brand mx-auto" href="#">RSUD</a> --}}
+  <h3 class="navbar-brand mx-auto  d-flex justify-content-center" style="color: black">RSUD</h3>
   <!-- Right navbar links -->
-  <ul class="navbar-nav ml-auto">
-
-    <!-- Theme -->
+  <ul class="navbar-nav ">
     <li class="nav-item">
       <a class="nav-link change_theme" href="#">
         <i class="fa fa-moon" aria-hidden="true"></i>
       </a>
     </li>
-    <!-- \Theme -->
-
     @can('view_visit')
     <!-- home visits notification -->
     <li class="nav-item dropdown visits_notification">
       <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-bell"></i>
+        <i class="fa-solid fa fa-book"></i>
+        {{-- <i class="far fa-bell"></i> --}}
         <span class="badge badge-warning navbar-badge visits_count"></span>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

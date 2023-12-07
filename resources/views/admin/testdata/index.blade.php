@@ -23,18 +23,37 @@
     </div><!-- /.container-fluid -->
 </div>
 @endsection
+<style>
+    #test_data_table {
+    border-radius: 10px; /* Mengatur radius sudut sebesar 10px */
+}
+
+/* Jika Anda ingin menyesuaikan setiap sudut secara terpisah, gunakan properti berikut */
+#test_data_table {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+/* Jika Anda ingin menyesuaikan setiap sudut secara terpisah, gunakan properti berikut */
+.card.custom-radius {
+    border-radius: 20px !important; /* Sesuaikan dengan nilai yang diinginkan */
+}
+</style>
 
 @section('content')
-<div class="card card-primary card-outline">
+<div class="card card-primary custom-radius" id="card-testdata1">
     <div class="card-header">
         <h3 class="card-title">{{ __('Test data table') }} </h3>
     </div>
     <!-- /.card-header -->
   
-        <div class="row">
-            <div class="col-lg-12 table-responsive">
-                <table id="test_data_table" class="table table-striped table-bordered"  width="100%">
-                    <thead>
+        <div class="row mr-3 ml-2">
+            <div class="col-lg-12 table-responsive mr-4 ml-2">
+                <table id="test_data_table" class="table table-striped table-bordered mr-4 ml-1"  width="100%">
+                    <thead class="card-testdata1">
                         <tr>
                        
                             <th width="10px">DEVICE ID</th>
