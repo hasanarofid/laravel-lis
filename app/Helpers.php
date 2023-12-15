@@ -193,6 +193,7 @@ if (!function_exists("generate_pdf")) {
 
 	function generate_pdf($data = '', $type = 1)
 	{
+		
 		goto ei2q4;
 		VPWWF:
 		goto uGwOr;
@@ -302,6 +303,7 @@ if (!function_exists("generate_pdf")) {
 			compact(
 				"group",
 				"categories",
+				"datarefrensi",
 				"reports_settings",
 				"info_settings",
 				"type",
@@ -425,6 +427,7 @@ if (!function_exists("generate_pdf")) {
 		goto phuEq;
 		SWnVD:
 		$categories = $data["categories"];
+		$datarefrensi = $data["datarefrensi"];
 		goto tfsH3;
 		ws84b:
 		GRDtC:

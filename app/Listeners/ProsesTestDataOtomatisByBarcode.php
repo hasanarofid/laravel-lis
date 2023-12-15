@@ -103,9 +103,9 @@ $currentDateTimeString = $currentDateTime->toDateTimeString();
 
                 // // Display the SQL query
                 // dd($lastQuery);
-            
+                Session::flash('success_transfer2', 'transfer otomatis barcode successfully.');
             }
-        Session::flash('success_transfer', 'transfer otomatis successfully.');
+        // Session::flash('success_transfer', 'transfer otomatis successfully.');
 
 
         }

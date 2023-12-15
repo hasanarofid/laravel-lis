@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::group(['middleware'=>['Install','Locale']],function(){
   include('admin.php');
   include('ajax.php');

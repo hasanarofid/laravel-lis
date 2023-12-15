@@ -303,8 +303,36 @@ class MedicalReportsController extends Controller
      */
     public function print_report($id)
     {
-        $group = Group::findOrFail($id);
-
+        // dd($id);
+        $group = Group::with('all_tests')->findOrFail($id);
+        $datarefrensi = [];
+        foreach($group['all_tests'] as $test){
+            foreach($test["results"] as $result){
+                if(isset($result['component'])&&count($result['component']['reference_ranges'])){
+                    foreach($result['component']['reference_ranges'] as $reference_range){
+                        if(($reference_range['age_from'] <= $group['patient']['age'] && $reference_range['age_to'] >= $group['patient']['age']) &&
+                                        ($reference_range['gender'] == $group['patient']['gender'])){
+                                            // dd('gas');
+                                            // dd($reference_range);
+                                            $datatest = Test::find($reference_range['test_id']);
+                                            $cariParent = Test::find($datatest['parent_id']);
+                                         
+                                   
+                                            $datarefrensi = Group::with(['all_tests' => function ($q) use ($cariParent) {
+                                                $q->whereHas('test', function ($q) use ($cariParent) {
+                                                    $q->where('id', $cariParent->id)->with('components');
+                                                });
+                                                return $q->with('test.components');
+                                            }, 'all_cultures'])
+                                                ->where('id', $id)
+                                                ->firstOrFail();
+                                            
+                                            dd($datarefrensi);
+                         }
+                    }
+                }            
+            }
+        }
         if ($group['uploaded_report']) {
             return redirect($group['report_pdf']);
         }
@@ -327,9 +355,9 @@ class MedicalReportsController extends Controller
         }
 
         //generate pdf
-        $data = ['group' => $group, 'categories' => $categories];
+        $data = ['group' => $group, 'categories' => $categories,'datarefrensi'=>$datarefrensi];
         $pdf = generate_pdf($data);
-
+        // dd($pdf);
         return redirect($pdf); //return pdf url
     }
 

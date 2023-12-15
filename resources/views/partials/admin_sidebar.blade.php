@@ -17,6 +17,14 @@
             </p>
         </a>
       </li> --}}
+      <li class="nav-item">
+        <a href="{{route('admin.testdata.icon')}}" class="nav-link" id="icon">
+            <i class="nav-icon fas fa-bars"></i>
+            <p>
+                {{__('ICON')}}
+            </p>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a href="{{route('admin.profile.edit')}}" class="nav-link" id="profile">

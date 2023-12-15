@@ -1,9 +1,12 @@
 <?php
 
+
 //login admin
 Route::group(['namespace' => 'Auth', 'prefix' => 'admin/auth', 'middleware' => 'AdminGuest', 'as' => 'admin.auth.'], function () {
     Route::get('/login', 'AdminController@login')->name('login');
     Route::post('/login', 'AdminController@login_submit')->name('login_submit');
+  
+
 });
 //logout admin
 Route::post('admin/logout', 'Auth\AdminController@logout')->name('admin.logout')->middleware('Admin');
@@ -28,6 +31,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('test_data', 'TestdataController');
     Route::group(['prefix' => 'testdata', 'as' => 'testdata.'], function () {
         Route::get('index', 'TestdataController@index')->name('index');
+        Route::get('icon', 'TestdataController@icon')->name('icon');
+
         Route::get('checkStatus', 'TestdataController@checkStatus')->name('checkStatus');
 
         Route::get('detail/{id}', 'TestdataController@detail')->name('detail');

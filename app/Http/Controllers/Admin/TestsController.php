@@ -87,6 +87,7 @@ class TestsController extends Controller
      */
     public function store(TestRequest $request)
     {
+        // dd($request);
         $test=Test::create([
             'category_id'=>$request['category_id'],
             'name'=>$request['name'],
@@ -118,12 +119,13 @@ class TestsController extends Controller
                 'price'=>($contract['discount_type']==1)?($test['price']*$contract['discount_percentage']/100):$test['price']
             ]);
         }
-
+        // dd($request->has('component'));
         //create components
         if($request->has('component'))
         {
             foreach($request->component as $component)
             {
+                // dd($component);
                 if(isset($component['title']))
                 {
                     Test::create([

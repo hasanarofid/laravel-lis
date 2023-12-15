@@ -98,9 +98,9 @@ $currentDateTimeString = $currentDateTime->toDateTimeString();
 
                 // // Display the SQL query
                 // dd($lastQuery);
-            
+                Session::flash('success_transfer', 'transfer otomatis test data successfully.');
+
             }
-        Session::flash('success_transfer', 'transfer otomatis successfully.');
 
 
         }

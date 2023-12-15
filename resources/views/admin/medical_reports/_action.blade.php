@@ -54,15 +54,7 @@
              </a>
           </form>
        @endcan
-       @php
-                   $grouptest = App\Models\GroupTest::where('group_id', $group['id'])->first();
-            $status = App\Models\GroupTestResult::where('group_test_id', $grouptest->id)->first();
-       @endphp
-        <a style="cursor: pointer" data-toggle="modal" data-target="#print_status_modal" class="dropdown-item print_status" status_id="{{  $status->status }}" group_id="{{$group['id']}}">
-                <i class="fa fas fa-bell" aria-hidden="true"></i>
-                Ubah Status
-            </a>
-
+      
        
     </div>
 </div>

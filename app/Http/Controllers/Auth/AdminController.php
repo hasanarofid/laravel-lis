@@ -18,6 +18,9 @@ use Str;
 
 class AdminController extends Controller
 {
+    public function icon(){
+dd(1);
+    }
     /**
     * show login form
     *

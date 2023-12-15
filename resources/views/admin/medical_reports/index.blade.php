@@ -37,6 +37,18 @@
         {{ session('success_transfer') }}
     </div>
 @endif
+
+@if(session()->has('success_transfer1'))
+    <div class="alert alert-success">
+        {{ session('success_transfer1') }}
+    </div>
+@endif
+
+@if(session()->has('success_transfer2'))
+    <div class="alert alert-success">
+        {{ session('success_transfer2') }}
+    </div>
+@endif
         <!-- filter -->
         <div id="accordion">
             <div class="card card-info">

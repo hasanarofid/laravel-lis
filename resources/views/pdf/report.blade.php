@@ -112,8 +112,8 @@
             <h4 class="test_title" align="center">
                 {{$category['name']}}
             </h4>
-            @if(count($category['tests']))
-                @foreach($category['tests'] as $test)
+            @if(count($group['all_tests']))
+                @foreach($group['all_tests'] as $test)
                     @php 
                         $count++;
                     @endphp
@@ -137,11 +137,77 @@
                         </thead>
                         <tbody class="table-bordered">
                             @foreach($test["results"] as $result)
-                                <!-- Title -->
-                                @if(isset($result['component']))
+                         
+                            @if(isset($result['component'])&&count($result['component']['reference_ranges']))
+                                @foreach($result['component']['reference_ranges'] as $reference_range)
+                                    @if(($reference_range['age_from'] <= $group['patient']['age'] && $reference_range['age_to'] >= $group['patient']['age']) &&
+                                        ($reference_range['gender'] == $group['patient']['gender']))
+
+                                        
+                            @if(isset($datarefrensi))
+                            {{ dd($datarefrensi) }}
+                                @foreach($datarefrensi['all_tests'] as $data)
+                                
+                                
+                                    @foreach($data["results"] as $resultref)
+                                        <tr>
+                                            <td class="text-captitalize test_name">{{$resultref["component"]["name"]}}</td>
+                                            <td align="center" class="result">{{$resultref["result"]}}</td>
+                                            <td align="center" class="unit">{{$resultref["component"]["unit"]}}</td>
+                                            <td align="left" class="reference_range">
+                                                {!! $resultref["component"]["reference_range"] !!}
+                                            </td>
+                                            <td align="center" class="status">
+                                                {{$resultref['status']}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                @endforeach
+                            @endif
+
+                                            
+                                
+
+                                    @else
+                                    
+                                    @if(isset($result['component']))
+                                        @if($result['component']['title'])
+                                            <tr>
+                                                <td colspan="5" class="component_title test_name">
+                                                
+
+                                                    <b>{{$result['component']['name']}}</b>
+                                                </td>
+                                            </tr>
+                                        @else
+                                        <tr>
+                                            <td class="text-captitalize test_name">{{$result["component"]["name"]}}</td>
+                                            <td align="center" class="result">{{$result["result"]}}</td>
+                                            <td align="center" class="unit">{{$result["component"]["unit"]}}</td>
+                                            <td align="left" class="reference_range">
+                                                {!! $result["component"]["reference_range"] !!}
+                                            </td>
+                                            <td align="center" class="status">
+                                                {{$result['status']}}
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    @endif
+
+
+                                    @endif
+
+
+                                @endforeach
+
+                            @else
+                            @if(isset($result['component']))
                                     @if($result['component']['title'])
                                         <tr>
                                             <td colspan="5" class="component_title test_name">
+                                               
+
                                                 <b>{{$result['component']['name']}}</b>
                                             </td>
                                         </tr>
@@ -159,7 +225,14 @@
                                     </tr>
                                     @endif
                                 @endif
+
+
+                            @endif
+                               
                             @endforeach
+
+
+
                             <!-- Comment -->
                             @if(isset($test['comment']))
                                 <tr class="comment">

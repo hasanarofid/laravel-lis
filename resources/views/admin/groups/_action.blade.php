@@ -21,21 +21,19 @@
             <i class="fas fa-file-word" aria-hidden="true"></i>
             {{__('Working paper')}}
          </a>
+         @if(!empty($group['receipt_pdf']))
          <a href="{{$group['receipt_pdf']}}" class="dropdown-item" target="_blank">
             <i class="fa fa-print" aria-hidden="true"></i>
             {{__('Print receipt')}}
          </a>
-         <a href="{{route('admin.groups.show',$group['id'])}}" class="dropdown-item">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            {{__('Show receipt')}}
-         </a>
-         @if($whatsapp['receipt']['active']&&isset($group['receipt_pdf']))
+{{-- 
+         @if( $whatsapp['receipt']['active'] && !empty($group['receipt_pdf']) )
          <a target="_blank" href="{{whatsapp_notification($group,'receipt')}}" class="dropdown-item">
             <i class="fab fa-whatsapp" aria-hidden="true" class="text-success"></i>
             {{__('Send receipt')}}
          </a>
          @endif
-         @if($email['receipt']['active']&&isset($group['receipt_pdf']))
+         @if($email['receipt']['active']&&!empty($group['receipt_pdf']))
          <form action="{{route('admin.groups.send_receipt_mail',$group['id'])}}" method="POST" class="d-inline">
             @csrf
             <button type="submit" class="dropdown-item">
@@ -43,7 +41,18 @@
                {{__('Send receipt')}}
             </button>
          </form>
-         @endif
+         @endif --}}
+
+     @else
+         <!-- Code to execute when $group['receipt_pdf'] is not empty -->
+     @endif
+     
+
+         <a href="{{route('admin.groups.show',$group['id'])}}" class="dropdown-item">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            {{__('Show receipt')}}
+         </a>
+
        @endcan
        
        @can('edit_medical_report')

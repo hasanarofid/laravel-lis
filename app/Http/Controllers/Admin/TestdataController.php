@@ -12,6 +12,10 @@ use App\Models\GroupTestResult;
 
 class TestdataController extends Controller
 {
+public function icon(){
+    return view('admin.icon.index');
+}
+
     /**
      * assign roles
      */
